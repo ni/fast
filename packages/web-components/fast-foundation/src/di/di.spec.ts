@@ -353,7 +353,7 @@ describe(`The Resolver class`, function () {
         });
 
         it(`throws for unknown strategy`, function () {
-            const sut = new ResolverImpl("foo", -1, null);
+            const sut = new ResolverImpl("foo", -1 as ResolverStrategy, null);
             expect(() => sut.resolve(container, container)).throws();
         });
     });
