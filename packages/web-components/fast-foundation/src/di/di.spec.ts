@@ -10,11 +10,12 @@ import {
     singleton,
     transient,
 } from "./di";
-import chai, { expect } from "chai";
+import * as chaiIn from "chai";
+import { expect } from "chai";
 import spies from "chai-spies";
 import { customElement, FASTElement, html, ref } from "@ni/fast-element";
 
-chai.use(spies);
+const chai = chaiIn.use(spies);
 
 function decorator(): ClassDecorator {
     return (target: any) => target;

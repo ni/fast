@@ -1,9 +1,11 @@
 {
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
+        "rootDir": "src",
         "declarationDir": "dist/dts",
         "outDir": "dist/esm",
         "importsNotUsedAsValues": "error",
+        "ignoreDeprecations": "5.0",
         "experimentalDecorators": true,
         "noImplicitAny": false,
         "strictPropertyInitialization": false,
