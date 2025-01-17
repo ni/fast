@@ -1,7 +1,6 @@
 {
     "extends": "../../../tsconfig.json",
     "compilerOptions": {
-        "rootDir": "src",
         "declarationDir": "dist/dts",
         "outDir": "dist/esm",
         "importsNotUsedAsValues": "error",
