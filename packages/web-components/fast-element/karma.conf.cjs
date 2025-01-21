@@ -28,25 +28,23 @@ module.exports = function (config) {
         browsers = ["Chrome"];
     }
 
-    const setup = "setup-browser" + (config.package ? "-" + config.package : "");
     const options = {
         basePath,
         browserDisconnectTimeout: 10000,
         processKillTimeout: 10000,
-        frameworks: ["source-map-support", "mocha"],
+        frameworks: ["source-map-support", "mocha", "webpack"],
         plugins: [
             require("karma-mocha"),
             require("karma-mocha-reporter"),
             require("karma-webpack"),
             require("karma-source-map-support"),
             require("karma-sourcemap-loader"),
-            require("karma-coverage-istanbul-reporter"),
             require("karma-chrome-launcher"),
             require("karma-firefox-launcher"),
         ],
-        files: [`dist/esm/__test__/${setup}.js`],
+        files: [`dist/esm/__test__/setup-browser.js`],
         preprocessors: {
-            [`dist/esm/__test__/${setup}.js`]: ["webpack", "sourcemap"],
+            [`dist/esm/__test__/setup-browser.js`]: ["webpack", "sourcemap"],
         },
         webpackMiddleware: {
             // webpack-dev-middleware configuration
@@ -89,12 +87,10 @@ module.exports = function (config) {
                     },
                     {
                         test: /\.js$/,
+                        enforce: "pre",
                         use: [
                             {
                                 loader: "source-map-loader",
-                                options: {
-                                    enforce: "pre",
-                                },
                             },
                         ],
                     },
@@ -127,26 +123,6 @@ module.exports = function (config) {
         },
         logLevel: config.LOG_ERROR, // to disable the WARN 404 for image requests
     };
-
-    if (config.coverage) {
-        options.webpack.module.rules.push({
-            enforce: "post",
-            exclude: /(__tests__|testing|node_modules|\.spec\.[tj]s$)/,
-            loader: "istanbul-instrumenter-loader",
-            options: { esModules: true },
-            test: /\.[tj]s$/,
-        });
-        options.reporters = ["coverage-istanbul", ...options.reporters];
-        options.coverageIstanbulReporter = {
-            reports: ["html", "text-summary", "json", "lcovonly", "cobertura"],
-            dir: "coverage",
-        };
-        options.junitReporter = {
-            outputDir: "coverage",
-            outputFile: "test-results.xml",
-            useBrowserName: false,
-        };
-    }
 
     config.set(options);
 };
