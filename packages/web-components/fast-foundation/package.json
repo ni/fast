@@ -28,7 +28,7 @@
     "test": "npm run test-chrome:verbose",
     "clean:dist": "rimraf dist",
     "doc": "api-extractor run --local",
-    "build:rollup": "rollup -c",
+    "build:rollup": "rollup --bundleConfigAsCjs -c",
     "build:tsc": "tsc -p ./tsconfig.json",
     "dev": "tsc -p ./tsconfig.json -w",
     "tdd": "npm run dev & npm run test-chrome:watch",

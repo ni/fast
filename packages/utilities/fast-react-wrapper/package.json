@@ -21,7 +21,7 @@
   "types": "dist/fast-react-wrapper.d.ts",
   "unpkg": "dist/fast-react-wrapper.min.js",
   "scripts": {
-    "build": "npm run clean:dist && tsc -p ./tsconfig.json && rollup -c && npm run doc",
+    "build": "npm run clean:dist && tsc -p ./tsconfig.json && rollup --bundleConfigAsCjs -c && npm run doc",
     "pack": "npm pack",
     "lint": "npm run eslint",
     "format": "npm run eslint:fix",
