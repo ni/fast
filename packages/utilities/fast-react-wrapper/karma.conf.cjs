@@ -1,3 +1,8 @@
+const playwright = require('playwright');
+
+process.env.FIREFOX_BIN = playwright.firefox.executablePath();
+process.env.CHROME_BIN = playwright.chromium.executablePath();
+
 const path = require("path");
 
 const basePath = path.resolve(__dirname);
