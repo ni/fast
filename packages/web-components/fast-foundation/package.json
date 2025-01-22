@@ -20,7 +20,6 @@
   "main": "dist/esm/index.js",
   "types": "dist/fast-foundation.d.ts",
   "unpkg": "dist/fast-foundation.min.js",
-  "type": "module",
   "scripts": {
     "build": "npm run clean:dist && npm run build:tsc && npm run build:rollup && npm run doc",
     "pack": "npm pack",

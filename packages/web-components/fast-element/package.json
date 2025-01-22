@@ -19,7 +19,6 @@
   },
   "main": "dist/esm/index.js",
   "types": "dist/fast-element.d.ts",
-  "type": "module",
   "unpkg": "dist/fast-element.min.js",
   "scripts": {
     "build": "npm run clean:dist && npm run build:tsc && npm run build:rollup && npm run doc",
