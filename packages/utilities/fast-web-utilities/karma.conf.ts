@@ -40,7 +40,6 @@ module.exports = function (config: any) {
             require("karma-webpack"),
             require("karma-source-map-support"),
             require("karma-sourcemap-loader"),
-            require("karma-coverage-istanbul-reporter"),
             require("karma-chrome-launcher"),
             require("karma-firefox-launcher"),
         ],
@@ -89,12 +88,10 @@ module.exports = function (config: any) {
                     },
                     {
                         test: /\.js$/,
+                        enforce: "pre",
                         use: [
                             {
                                 loader: "source-map-loader",
-                                options: {
-                                    enforce: "pre",
-                                },
                             },
                         ],
                     },
@@ -127,36 +124,6 @@ module.exports = function (config: any) {
         },
         logLevel: config.LOG_ERROR, // to disable the WARN 404 for image requests
     };
-
-    if (config.coverage) {
-        options.webpack.module.rules.push({
-            enforce: "post",
-            exclude: /(__tests__|testing|node_modules|\.spec\.[tj]s$)/,
-            loader: "istanbul-instrumenter-loader",
-            options: { esModules: true },
-            test: /\.[tj]s$/,
-        } as any);
-        options.reporters = ["coverage-istanbul", ...options.reporters];
-        (options as any).coverageIstanbulReporter = {
-            reports: ["html", "text-summary", "json", "lcovonly", "cobertura"],
-            dir: "coverage",
-            verbose: true,
-            thresholds: {
-                emitWarning: false,
-                global: {
-                    statements: 90,
-                    lines: 90,
-                    branches: 90,
-                    functions: 90,
-                },
-            },
-        };
-        (options as any).junitReporter = {
-            outputDir: "coverage",
-            outputFile: "test-results.xml",
-            useBrowserName: false,
-        };
-    }
 
     config.set(options);
 };
