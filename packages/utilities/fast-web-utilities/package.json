@@ -44,12 +44,12 @@
     "watch": "npm run build -- -w --preserveWatchOutput"
   },
   "devDependencies": {
-    "@types/chai": "^5.0.1",
+    "@types/chai": "^4",
     "@types/chai-spies": "^1.0.3",
     "@types/karma": "^6.3.9",
     "@types/mocha": "^10.0.10",
     "@ni/eslint-config-fast-dna": "^1.0.0",
-    "chai": "^5.1.2",
+    "chai": "^4",
     "chai-spies": "^1.0.0",
     "eslint-config-prettier": "^10.0.1",
     "jsdom": "^26.0.0",
