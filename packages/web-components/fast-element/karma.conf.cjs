@@ -28,6 +28,7 @@ module.exports = function (config) {
         browsers = ["Chrome"];
     }
 
+    const setup = "setup-browser" + (config.package ? "-" + config.package : "");
     const options = {
         basePath,
         browserDisconnectTimeout: 10000,
@@ -42,9 +43,9 @@ module.exports = function (config) {
             require("karma-chrome-launcher"),
             require("karma-firefox-launcher"),
         ],
-        files: [`dist/esm/__test__/setup-browser.js`],
+        files: [`dist/esm/__test__/${setup}.js`],
         preprocessors: {
-            [`dist/esm/__test__/setup-browser.js`]: ["webpack", "sourcemap"],
+            [`dist/esm/__test__/${setup}.js`]: ["webpack", "sourcemap"],
         },
         webpackMiddleware: {
             // webpack-dev-middleware configuration
