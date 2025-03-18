@@ -40,7 +40,7 @@ See the corresponding `Getting Started` section in the packages hosted in the re
   - See related [`@microsoft/fast-element` API](https://fast.design/docs/1.x/api/fast-element) documentation.
 - **[`@ni/fast-foundation`](/packages/web-components/fast-foundation/)** - FAST foundation base classes for common design system components.
   - See related [FAST 1.x: Creating a Component Library](https://fast.design/docs/1.x/design-systems/creating-a-component-library) documentation.
-  - See related [`@microsoft/fast-foundation` API](https://fast.design/docs/1.x/api/fast-foundationt) documentation.
+  - See related [`@microsoft/fast-foundation` API](https://fast.design/docs/1.x/api/fast-foundation) documentation.
 
 ### Utilitiy packages
 
