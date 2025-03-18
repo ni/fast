@@ -36,10 +36,10 @@ See the corresponding `Getting Started` section in the packages hosted in the re
 [![NI FAST Foundation NPM version and repo link](https://img.shields.io/npm/v/@ni/fast-foundation.svg?label=@ni/fast-foundation)](https://www.npmjs.com/package/@ni/fast-foundation)
 
 - **[`@ni/fast-element`](/packages/web-components/fast-element/)** - FAST base class, templating, and modelling system.
-  - See related [`FAST 1.x: Defining Elements](https://fast.design/docs/1.x/fast-element/defining-elements) documentation.
+  - See related [FAST 1.x: Defining Elements](https://fast.design/docs/1.x/fast-element/defining-elements) documentation.
   - See related [`@microsoft/fast-element` API](https://fast.design/docs/1.x/api/fast-element) documentation.
 - **[`@ni/fast-foundation`](/packages/web-components/fast-foundation/)** - FAST foundation base classes for common design system components.
-  - See related [`FAST 1.x: Creating a Component Library](https://fast.design/docs/1.x/design-systems/creating-a-component-library) documentation.
+  - See related [FAST 1.x: Creating a Component Library](https://fast.design/docs/1.x/design-systems/creating-a-component-library) documentation.
   - See related [`@microsoft/fast-foundation` API](https://fast.design/docs/1.x/api/fast-foundationt) documentation.
 
 ### Utilitiy packages
