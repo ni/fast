@@ -1,6 +1,12 @@
+<div align="center">
+    <p><b>ni | fast | colors</b></p>
+</div>
+
 # FAST Colors
 
-`@microsoft/fast-colors` includes a number of color classes and utilities designed to make parsing and manipulating colors easy, fast, and light-weight.
+[![NI FAST Colors NPM version and repo link](https://img.shields.io/npm/v/@ni/fast-colors.svg?label=@ni/fast-colors)](https://www.npmjs.com/package/@ni/fast-colors)
+
+`@ni/fast-colors` includes a number of color classes and utilities designed to make parsing and manipulating colors easy, fast, and light-weight.
 
 ## Color classes
 
@@ -28,7 +34,7 @@ A number of color parsers are also available to parse a variety of different col
 - `parseColorHexRGBA(raw: string): ColorRGBA64 | null` parses `#RGBA` or `#RRGGBBAA` color strings
 - `parseColorWebRGB(raw: string): ColorRGBA64 | null` parses `#rgb(R, G, B)` color strings
 - `parseColorWebRGBA(raw: string): ColorRGBA64 | null` parses `#rgb(R, G, B, A)` color strings
-- `parseColorNamned(raw: string): ColorRGBA64 | null` parses [named color strings](https://www.w3schools.com/colors/colors_names.asp)
+- `parseColorNamed(raw: string): ColorRGBA64 | null` parses [named color strings](https://www.w3schools.com/colors/colors_names.asp)
 
 ## Color Palette
 

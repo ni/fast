@@ -21,7 +21,7 @@ In May 2024 the [Microsoft FAST project changed directions](https://github.com/m
 
 - Maintain the FAST libraries used in the fork.
 - Perform dependency version updates and generic bug fixes for existing features.
-- Adopt minor features targetted to consistency / alignment for general purpose use.
+- Adopt minor features targeted to consistency / alignment for general purpose use.
 - Avoid new major feature or component development, prefer forking templates for significant or non-generic changes.
 - Potentially re-integrate [removed packages or features](https://github.com/ni/nimble/blob/main/specs/fast-project-realignment/README.md#minimal-fork-proposal) based on future needs or community feedback.
 - Potentially stage / research minor changes to assist in [future work for handling FAST re-alignment](https://github.com/ni/nimble/blob/main/specs/fast-project-realignment/README.md#future-work).
@@ -42,14 +42,15 @@ See the corresponding `Getting Started` section in the packages hosted in the re
   - See related [FAST 1.x: Creating a Component Library](https://fast.design/docs/1.x/design-systems/creating-a-component-library) documentation.
   - See related [`@microsoft/fast-foundation` API](https://fast.design/docs/1.x/api/fast-foundation) documentation.
 
-### Utilitiy packages
+### Utility packages
 
 [![NI FAST Colors NPM version and repo link](https://img.shields.io/npm/v/@ni/fast-colors.svg?label=@ni/fast-colors)](https://www.npmjs.com/package/@ni/fast-colors)
 [![NI FAST React Wrapper NPM version and repo link](https://img.shields.io/npm/v/@ni/fast-react-wrapper.svg?label=@ni/fast-react-wrapper)](https://www.npmjs.com/package/@ni/fast-react-wrapper)
 [![NI FAST Web Utilities NPM version and repo link](https://img.shields.io/npm/v/@ni/fast-web-utilities.svg?label=@ni/fast-web-utilities)](https://www.npmjs.com/package/@ni/fast-web-utilities)
 
 - **[`@ni/fast-colors`](/packages/utilities/fast-colors/)** - Color classes and utilities to parse and manipulate colors.
-- **[`@ni/react-wrapper`](/packages/utilities/fast-react-wrapper/)** - A utility that enables automatically wrapping Web Components in a React component.
+- **[`@ni/fast-react-wrapper`](/packages/utilities/fast-react-wrapper/)** - A utility that enables automatically wrapping Web Components in a React component.
+  - See related [FAST 1.x: React integration](https://fast.design/docs/1.x/integrations/react) documentation.
 - **[`@ni/fast-web-utilities`](/packages/utilities/fast-web-utilities/)** - A collection of utilities intended to be used for web projects.
 
 ## Community
