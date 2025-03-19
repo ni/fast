@@ -1,6 +1,6 @@
 {
-  "type": "patch",
-  "comment": "Updated README docs",
+  "type": "major",
+  "comment": "README updates",
   "packageName": "@ni/fast-react-wrapper",
   "email": "rajsite@users.noreply.github.com",
   "dependentChangeType": "patch"

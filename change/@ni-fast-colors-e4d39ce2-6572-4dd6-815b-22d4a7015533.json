@@ -1,6 +1,6 @@
 {
   "type": "major",
-  "comment": "README updates and doc README removal",
+  "comment": "README updates",
   "packageName": "@ni/fast-colors",
   "email": "rajsite@users.noreply.github.com",
   "dependentChangeType": "patch"
