@@ -26,7 +26,7 @@ Within your JavaScript or TypeScript code, you can then import library APIs like
 import { Anchor } from '@ni/fast-foundation';
 ```
 
-Looking for a setup that integrates with a particular front-end framework or bundler? Check out the [FAST 1.x integration docs](https://fast.design/docs/1.x/integrations/introduction).
+Looking for a setup that integrates with a particular front-end framework or bundler? Check out the [FAST 1.x: integration docs](https://fast.design/docs/1.x/integrations/introduction).
 
 ### Documentation
 

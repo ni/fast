@@ -8,9 +8,15 @@
 
 This package is a collection of utilities intended to be used for web projects.
 
-## Installation
+## Getting Started
 
-`npm install @ni/fast-web-utilities`
+### Installing from NPM
+
+To install the `fast-web-utilities` library, use `npm` as follows:
+
+```shell
+npm install @ni/fast-web-utilities
+```
 
 ## Usage
 
@@ -92,7 +98,7 @@ let direction: Direction = Direction.ltr;
 
 #### Limit
 
-The `limit` function ensures that a value is between a min and max value. If the value is lower than min, min will be returned. If the value is greater than max, max will be retured.
+The `limit` function ensures that a value is between a min and max value. If the value is lower than min, min will be returned. If the value is greater than max, max will be returned.
 
 ```js
 import { limit } from "@ni/fast-web-utilities";

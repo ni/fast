@@ -8,11 +8,11 @@
 
 The `fast-react-wrapper` package contains a utility that enables automatically wrapping Web Components in a React component for ease of integration into React projects.
 
-## Installation
+## Getting Started
 
-### From NPM
+### Installing from NPM
 
-To install the `fast-react-wrapper` library, use either `npm` or `yarn` as follows:
+To install the `fast-react-wrapper` library, use `npm` as follows:
 
 ```shell
 npm install @ni/fast-react-wrapper

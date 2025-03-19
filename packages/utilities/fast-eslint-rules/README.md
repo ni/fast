@@ -5,6 +5,7 @@
 ## Getting Started
 
 Add `@ni/eslint-config-fast-dna` as an extension in your eslint config:
+
 ```js
 {
     "extends": [
