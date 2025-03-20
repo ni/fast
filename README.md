@@ -64,3 +64,7 @@ The fastest way to ask questions is to [join the discussion on Teams](https://te
 See `Getting Started` in [`Contributing.md`](/CONTRIBUTING.md#getting-started) to get started with building the monorepo.
 
 [![contributors](https://markupgo.com/github/ni/fast/contributors?width=800&count=0&circleSpacing=10&removeLogo=true)](https://github.com/ni/fast/graphs/contributors)
+
+## Acknowledgements
+
+Thank you to the team at [Microsoft FAST](https://github.com/microsoft/fast) for starting this project!
