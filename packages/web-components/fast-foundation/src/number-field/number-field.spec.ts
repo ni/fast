@@ -848,6 +848,27 @@ describe("NumberField", () => {
 
             await disconnect();
         });
+
+        it("should allow 15 precision float entry", async () => {
+            const { element, disconnect } = await setup();
+            const floatValue = "0.123456789012345";
+
+            element.setAttribute("value", floatValue);
+            expect(element.value).to.equal(floatValue);
+
+            await disconnect();
+        });
+
+        it("should round off float values to 15 precision", async () => {
+            const { element, disconnect } = await setup();
+            const floatValue = "0.1234567890123456";
+            const expectedValue = "0.123456789012346";
+
+            element.setAttribute("value", floatValue);
+            expect(element.value).to.equal(expectedValue);
+
+            await disconnect();
+        });
     });
 
     describe("hide step", () => {
