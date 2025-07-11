@@ -849,7 +849,7 @@ describe("NumberField", () => {
             await disconnect();
         });
 
-        it("should allow 15 precision float entry", async () => {
+        it("should allow 15 digits float entry", async () => {
             const { element, disconnect } = await setup();
             const floatValue = "0.123456789012345";
 
@@ -865,6 +865,29 @@ describe("NumberField", () => {
             const expectedValue = "0.123456789012346";
 
             element.setAttribute("value", floatValue);
+            expect(element.value).to.equal(expectedValue);
+
+            await disconnect();
+        });
+
+        it("should allow number entry upto 15 digits", async () => {
+            const value = "123456789012345";
+            const { element, disconnect } = await setup();
+
+            element.setAttribute("value", value);
+
+            expect(element.value).to.equal(value);
+
+            await disconnect();
+        });
+
+        it("should round off number entry to 15 digits", async () => {
+            const value = "12345678901234567";
+            const expectedValue = "12345678901234600";
+            const { element, disconnect } = await setup();
+
+            element.setAttribute("value", value);
+
             expect(element.value).to.equal(expectedValue);
 
             await disconnect();
