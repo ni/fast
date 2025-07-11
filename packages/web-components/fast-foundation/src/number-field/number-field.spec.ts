@@ -948,5 +948,45 @@ describe("NumberField", () => {
 
             await disconnect();
         });
+
+        it('should allow reading value as number upto 15 digits', async () => {
+            const { element, disconnect } = await setup();
+
+            element.value = "123456789012345";
+
+            expect(element.valueAsNumber).to.equal(123456789012345);
+
+            await disconnect();
+        });
+
+        it('should allow reading value as flot number upto 15 digits', async () => {
+            const { element, disconnect } = await setup();
+
+            element.value = "0.123456789012345";
+
+            expect(element.valueAsNumber).to.equal(0.123456789012345);
+
+            await disconnect();
+        });
+
+        it("should round off value as number to 15 digits", async () => {
+            const { element, disconnect } = await setup();
+
+            element.value = "12345678901234567";
+
+            expect(element.valueAsNumber).to.equal(12345678901234600);
+
+            await disconnect();
+        });
+
+        it("should round off value as float number to 15 digits", async () => {
+            const { element, disconnect } = await setup();
+
+            element.value = "0.1234567890123456";
+
+            expect(element.valueAsNumber).to.equal(0.123456789012346);
+
+            await disconnect();
+        });
     });
 });
