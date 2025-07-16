@@ -870,7 +870,7 @@ describe("NumberField", () => {
             await disconnect();
         });
 
-        it("should allow number entry upto 15 digits", async () => {
+        it("should allow number entry up to 15 digits", async () => {
             const value = "123456789012345";
             const { element, disconnect } = await setup();
 
@@ -949,7 +949,7 @@ describe("NumberField", () => {
             await disconnect();
         });
 
-        it('should allow reading value as number upto 15 digits', async () => {
+        it("should allow reading value as number up to 15 digits", async () => {
             const { element, disconnect } = await setup();
 
             element.value = "123456789012345";
@@ -959,7 +959,7 @@ describe("NumberField", () => {
             await disconnect();
         });
 
-        it('should allow reading value as flot number upto 15 digits', async () => {
+        it("should allow reading value as number up to 15 fractional digits", async () => {
             const { element, disconnect } = await setup();
 
             element.value = "0.123456789012345";
@@ -979,7 +979,7 @@ describe("NumberField", () => {
             await disconnect();
         });
 
-        it("should round off value as float number to 15 digits", async () => {
+        it("should round off value as number to 15 fractional digits", async () => {
             const { element, disconnect } = await setup();
 
             element.value = "0.1234567890123456";
