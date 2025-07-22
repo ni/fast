@@ -243,7 +243,7 @@ export class NumberField extends FormAssociatedNumberField {
     }
 
     private limitPrecision(value: number): number {
-        return parseFloat(value.toPrecision(12));
+        return parseFloat(value.toPrecision(15));
     }
 
     /**
