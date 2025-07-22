@@ -547,11 +547,11 @@ describe("NumberField", () => {
         });
 
         it("should limit precision when clamping to max", async () => {
-            const max = 1000.0123456789; // 14 digits of precision
-            const value = '1001';
+            const max = 1000000.0123456789; // 17 digits of precision
+            const value = '1000001';
             const { element, disconnect } = await setup({value, max});
 
-            expect(element.value).to.equal("1000.0123468");
+            expect(element.value).to.equal("1000000.0123468");
 
             await disconnect();
         });
@@ -586,11 +586,11 @@ describe("NumberField", () => {
         });
 
         it("should limit precision when clamping to min", async () => {
-            const min = 1000.0123456789; // 14 digits of precision
-            const value = '999';
+            const min = 1000000.0123456789; // 17 digits of precision
+            const value = '999999';
             const { element, disconnect } = await setup({value, min});
 
-            expect(element.value).to.equal("1000.01234678");
+            expect(element.value).to.equal("1000000.01234678");
 
             await disconnect();
         });
