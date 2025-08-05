@@ -255,14 +255,13 @@ export class NumberField extends FormAssociatedNumberField {
     private getValidValue(value: string): string {
         let validValue: number | string = this.limitPrecision(parseFloat(value));
         if (isNaN(validValue)) {
-            validValue = "";
-        } else {
-            if (this.max !== undefined) {
-                validValue = Math.min(validValue, this.limitPrecision(this.max));
-            }
-            if (this.min !== undefined) {
-                validValue = Math.max(validValue, this.limitPrecision(this.min));
-            }
+            return "";
+        }
+        if (this.max !== undefined) {
+            validValue = Math.min(validValue, this.limitPrecision(this.max));
+        }
+        if (this.min !== undefined) {
+            validValue = Math.max(validValue, this.limitPrecision(this.min));
         }
 
         return validValue.toString();
