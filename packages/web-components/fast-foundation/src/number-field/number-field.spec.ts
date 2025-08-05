@@ -551,7 +551,7 @@ describe("NumberField", () => {
             const value = '1000001';
             const { element, disconnect } = await setup({value, max});
 
-            expect(element.value).to.equal("1000000.0123468");
+            expect(element.value).to.equal("1000000.01234568");
 
             await disconnect();
         });
@@ -590,7 +590,7 @@ describe("NumberField", () => {
             const value = '999999';
             const { element, disconnect } = await setup({value, min});
 
-            expect(element.value).to.equal("1000000.01234678");
+            expect(element.value).to.equal("1000000.01234568");
 
             await disconnect();
         });
