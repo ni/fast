@@ -253,7 +253,7 @@ export class NumberField extends FormAssociatedNumberField {
      * @internal
      */
     private getValidValue(value: string): string {
-        let validValue: number | string = this.limitPrecision(parseFloat(value));
+        let validValue: number = this.limitPrecision(parseFloat(value));
         if (isNaN(validValue)) {
             return "";
         }
