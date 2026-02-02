@@ -198,9 +198,9 @@ export class HTMLBindingDirective extends TargetedHTMLDirective {
      * Creates an instance of BindingDirective.
      * @param binding - A binding that returns the data used to update the DOM.
      */
-    public constructor(public binding: Binding) {
+    public constructor(public binding: Binding, isVolatile?: boolean) {
         super();
-        this.isBindingVolatile = Observable.isVolatileBinding(this.binding);
+        this.isBindingVolatile = isVolatile ?? Observable.isVolatileBinding(this.binding);
     }
 
     /**
