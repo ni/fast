@@ -1,5 +1,5 @@
 import { _interpolationEnd, _interpolationStart, DOM } from "../dom.js";
-import { Observable, type Binding, type ExecutionContext } from "../observation/observable.js";
+import { type Binding, type ExecutionContext, Observable } from "../observation/observable.js";
 import { HTMLBindingDirective } from "./binding.js";
 import type { HTMLDirective, NodeBehaviorFactory } from "./html-directive.js";
 
