@@ -10,7 +10,7 @@ import { compileTemplate } from "./compiler";
 import type { HTMLDirective } from "./html-directive";
 import { html } from "./template";
 
-describe.only("The template compiler", () => {
+describe("The template compiler", () => {
     function compile(html: string, directives: HTMLDirective[]) {
         const template = document.createElement("template");
         template.innerHTML = html;
