@@ -4,6 +4,7 @@
         "declarationDir": "dist/dts",
         "outDir": "dist/esm",
         "experimentalDecorators": true,
+        "useDefineForClassFields": false,
         "target": "es2022",
         "module": "es2020",
         "importHelpers": true,
