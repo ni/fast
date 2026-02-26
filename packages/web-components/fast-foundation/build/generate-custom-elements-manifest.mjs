@@ -18,20 +18,20 @@
  *   node build/generate-custom-elements-manifest.mjs
  */
 
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import * as fs from "node:fs";
+import * as path from "node:path";
 
-import { create, ts } from '@custom-elements-manifest/analyzer';
-import { attrDecoratorPlugin } from './cem-plugin-fast-element.mjs';
+import { create, ts } from "@custom-elements-manifest/analyzer";
+import { attrDecoratorPlugin } from "./cem-plugin-fast-element.mjs";
 
 // ---------------------------------------------------------------------------
 // Paths
 // ---------------------------------------------------------------------------
 
-const packageDir = path.resolve(import.meta.dirname, '..');
-const srcDir = path.resolve(packageDir, 'src');
-const outDir = path.resolve(packageDir, 'dist');
-const outFile = path.resolve(outDir, 'custom-elements.json');
+const packageDir = path.resolve(import.meta.dirname, "..");
+const srcDir = path.resolve(packageDir, "src");
+const outDir = path.resolve(packageDir, "dist");
+const outFile = path.resolve(outDir, "custom-elements.json");
 
 // ---------------------------------------------------------------------------
 // Exclusions
@@ -42,11 +42,11 @@ const outFile = path.resolve(outDir, 'custom-elements.json');
  * infrastructure code that has no component API surface.
  */
 const EXCLUDED_DIRS = new Set([
-    '__test__',       // test setup utilities
-    'design-token',   // design token infrastructure (not component API)
-    'design-system',  // element registration helpers (not component API)
-    'di',             // dependency injection container
-    'test-utilities', // test helpers
+    "__test__",       // test setup utilities
+    "design-token",   // design token infrastructure (not component API)
+    "design-system",  // element registration helpers (not component API)
+    "di",             // dependency injection container
+    "test-utilities", // test helpers
 ]);
 
 /**
@@ -54,17 +54,17 @@ const EXCLUDED_DIRS = new Set([
  * Checked via String.prototype.endsWith().
  */
 const EXCLUDED_SUFFIXES = [
-    '.spec.ts',       // test files co-located with their subjects
-    '.template.ts',   // HTML template helpers (internal rendering detail)
+    ".spec.ts",       // test files co-located with their subjects
+    ".template.ts",   // HTML template helpers (internal rendering detail)
 ];
 
 /**
  * Exact file names excluded regardless of directory.
  */
 const EXCLUDED_FILES = new Set([
-    'index.ts',           // barrel re-exports
-    'index-rollup.ts',    // rollup-specific barrel
-    'interfaces.ts',      // pure type declarations, no runtime surface
+    "index.ts",           // barrel re-exports
+    "index-rollup.ts",    // rollup-specific barrel
+    "interfaces.ts",      // pure type declarations, no runtime surface
 ]);
 
 // ---------------------------------------------------------------------------
@@ -87,8 +87,8 @@ function collectSourceFiles(dir) {
             }
         } else if (
             entry.isFile() &&
-            entry.name.endsWith('.ts') &&
-            !entry.name.endsWith('.d.ts') &&
+            entry.name.endsWith(".ts") &&
+            !entry.name.endsWith(".d.ts") &&
             !EXCLUDED_FILES.has(entry.name) &&
             !EXCLUDED_SUFFIXES.some(suffix => entry.name.endsWith(suffix))
         ) {
@@ -112,8 +112,8 @@ console.log(`Analyzing ${absolutePaths.length} source files…`);
  * setParentNodes=true so that plugins can traverse parent nodes.
  */
 const modules = absolutePaths.map(absolute => {
-    const relativePath = path.relative(packageDir, absolute).replaceAll('\\', '/');
-    const source = fs.readFileSync(absolute, 'utf8');
+    const relativePath = path.relative(packageDir, absolute).replaceAll("\\", "/");
+    const source = fs.readFileSync(absolute, "utf8");
     return ts.createSourceFile(relativePath, source, ts.ScriptTarget.ES2015, /* setParentNodes */ true);
 });
 
@@ -128,12 +128,6 @@ const manifest = create({
 // Post-processing: remove empty modules and sort
 // ---------------------------------------------------------------------------
 
-// The @custom-elements-manifest/analyzer v0.x stamps schemaVersion "1.0.0",
-// but our output is structurally compatible with the 2.x spec (the changes are
-// additive). Explicitly set the latest version so tooling (e.g. cem-validator)
-// does not flag it as outdated.
-manifest.schemaVersion = '2.1.0';
-
 manifest.modules = manifest.modules
     .filter(m => (m.declarations?.length ?? 0) > 0 || (m.exports?.length ?? 0) > 0)
     .sort((a, b) => a.path.localeCompare(b.path));
@@ -143,15 +137,15 @@ manifest.modules = manifest.modules
 // ---------------------------------------------------------------------------
 
 fs.mkdirSync(outDir, { recursive: true });
-fs.writeFileSync(outFile, JSON.stringify(manifest, null, 2) + '\n');
+fs.writeFileSync(outFile, JSON.stringify(manifest, null, 2) + "\n");
 
 const classCount = manifest.modules
     .flatMap(m => m.declarations ?? [])
-    .filter(d => d.kind === 'class').length;
+    .filter(d => d.kind === "class").length;
 
 const attrCount = manifest.modules
     .flatMap(m => m.declarations ?? [])
-    .filter(d => d.kind === 'class')
+    .filter(d => d.kind === "class")
     .reduce((sum, d) => sum + (d.attributes?.length ?? 0), 0);
 
 console.log(`Written: ${path.relative(packageDir, outFile)}`);

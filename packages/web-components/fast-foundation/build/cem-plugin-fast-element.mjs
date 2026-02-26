@@ -16,7 +16,7 @@
  *
  * Handles both forms:
  *   @attr
- *   @attr({ attribute: 'my-attr', mode: 'boolean' })
+ *   @attr({ attribute: "my-attr", mode: "boolean" })
  *
  * @param {import('typescript')} ts
  * @param {import('typescript').Decorator} decorator
@@ -47,24 +47,30 @@ function getAttrOption(ts, decorator, optionKey) {
  * @param {string} propertyName
  * @returns {string}
  */
-function propertyToAttributeName(propertyName) {
-    return propertyName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+export function propertyToAttributeName(propertyName) {
+    return propertyName.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
 }
 
 /**
- * Creates a CEM Attribute entry from a CEM ClassField.
+ * Creates a CEM Attribute entry from a CEM ClassField, keeping only the
+ * properties defined by the CEM Attribute schema.
  *
  * @param {object} field  A CEM ClassField declaration object
  * @returns {object}  A CEM Attribute declaration object
  */
-function fieldToAttribute(field) {
-    const attribute = { ...field, fieldName: field.name };
-    delete attribute.kind;
-    delete attribute.static;
-    delete attribute.privacy;
-    delete attribute.reflects;
-    delete attribute.resolveInitializer;
-    return attribute;
+export function fieldToAttribute(field) {
+    return Object.fromEntries(
+        Object.entries({
+            name: field.name,
+            fieldName: field.name,
+            description: field.description,
+            summary: field.summary,
+            type: field.type,
+            default: field.default,
+            deprecated: field.deprecated,
+            inheritedFrom: field.inheritedFrom,
+        }).filter(([, v]) => v !== undefined)
+    );
 }
 
 // ---------------------------------------------------------------------------
@@ -78,13 +84,13 @@ function fieldToAttribute(field) {
  *   1. Derives the HTML attribute name (explicit or camelCase → kebab-case).
  *   2. Creates a CEM Attribute entry and adds it to the class declaration.
  *   3. Marks the corresponding field with {reflects: true, attribute: name}.
- *   4. Overrides the field type to boolean for @attr({ mode: 'boolean' }).
+ *   4. Overrides the field type to boolean for @attr({ mode: "boolean" }).
  *
  * @returns {import('@custom-elements-manifest/analyzer').Plugin}
  */
 export function attrDecoratorPlugin() {
     return {
-        name: 'ni-fast-element-attr',
+        name: "ni-fast-element-attr",
 
         analyzePhase({ ts, node, moduleDoc }) {
             if (node.kind !== ts.SyntaxKind.ClassDeclaration) return;
@@ -101,34 +107,32 @@ export function attrDecoratorPlugin() {
                 const attrDecorator = member.modifiers?.find(
                     m => ts.isDecorator(m) && (
                         // Plain @attr
-                        (ts.isIdentifier(m.expression) && m.expression.text === 'attr') ||
+                        (ts.isIdentifier(m.expression) && m.expression.text === "attr") ||
                         // @attr({ ... })
-                        (ts.isCallExpression(m.expression) && ts.isIdentifier(m.expression.expression) && m.expression.expression.text === 'attr')
+                        (ts.isCallExpression(m.expression) && ts.isIdentifier(m.expression.expression) && m.expression.expression.text === "attr")
                     )
                 );
                 if (!attrDecorator) continue;
 
                 const propertyName = member.name.getText();
-                const explicitName = getAttrOption(ts, attrDecorator, 'attribute');
+                const explicitName = getAttrOption(ts, attrDecorator, "attribute");
                 const attributeName = explicitName ?? propertyToAttributeName(propertyName);
-                const isBoolean = getAttrOption(ts, attrDecorator, 'mode') === 'boolean';
+                const isBoolean = getAttrOption(ts, attrDecorator, "mode") === "boolean";
 
-                // Annotate the already-created class field
+                // Annotate the already-created class field and create a
+                // top-level attribute entry on the class
                 const field = classDoc.members?.find(m => m.name === propertyName);
                 if (field) {
                     field.attribute = attributeName;
                     field.reflects = true;
                     if (isBoolean) {
-                        field.type = { text: 'boolean' };
+                        field.type = { text: "boolean" };
                     }
-                }
 
-                // Create a top-level attribute entry on the class
-                if (field) {
                     const attribute = fieldToAttribute(field);
                     attribute.name = attributeName;
                     if (isBoolean) {
-                        attribute.type = { text: 'boolean' };
+                        attribute.type = { text: "boolean" };
                     }
                     classDoc.attributes = [...(classDoc.attributes ?? []), attribute];
                 }
