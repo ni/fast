@@ -157,9 +157,6 @@ export class Toolbar extends FoundationElement {
     public connectedCallback() {
         super.connectedCallback();
         this.direction = getDirection(this);
-        if (!this.slottedItems?.length && !this.childItems?.length) {
-            this.reduceFocusableElements();
-        }
     }
 
     /**
@@ -225,7 +222,7 @@ export class Toolbar extends FoundationElement {
     protected get allSlottedItems(): (HTMLElement | Node)[] {
         return [
             ...this.start.assignedElements(),
-            ...(this.slottedItems ?? []),
+            ...this.slottedItems,
             ...this.end.assignedElements(),
         ];
     }

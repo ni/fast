@@ -259,4 +259,56 @@ describe("Toolbar", () => {
 
     await disconnect();
   });
+
+  it("should handle focusin when focusableElements becomes undefined", async () => {
+    const { element, connect, disconnect, document, startButton } = await setup();
+
+    await connect();
+
+    const tempButton = document.createElement('button');
+    document.body.appendChild(tempButton);
+    tempButton.focus();
+    await DOM.nextUpdate();
+
+    expect(document.activeElement).to.equal(tempButton);
+
+    Reflect.set(element as object, "focusableElements", undefined);
+    await DOM.nextUpdate();
+
+    startButton.focus();
+    await DOM.nextUpdate();
+
+    expect(document.activeElement).to.equal(startButton);
+
+    tempButton.remove();
+    await disconnect();
+  });
+
+  it("should handle keydown when focusableElements becomes undefined", async () => {
+    const { element, connect, disconnect, document, startButton } = await setup();
+
+    await connect();
+
+    const tempButton = document.createElement("button");
+    document.body.appendChild(tempButton);
+    tempButton.focus();
+    await DOM.nextUpdate();
+
+    expect(document.activeElement).to.equal(tempButton);
+
+    startButton.focus();
+    await DOM.nextUpdate();
+
+    Reflect.set(element as object, "reduceFocusableElements", () => undefined);
+    Reflect.set(element as object, "focusableElements", undefined);
+    await DOM.nextUpdate();
+
+    pressRightArrowKey(element);
+    await DOM.nextUpdate();
+
+    expect(document.activeElement).to.equal(startButton);
+
+    tempButton.remove();
+    await disconnect();
+  });
 });
