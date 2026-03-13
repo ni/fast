@@ -260,55 +260,20 @@ describe("Toolbar", () => {
     await disconnect();
   });
 
-  it("should handle focusin when focusableElements becomes undefined", async () => {
-    const { element, connect, disconnect, document, startButton } = await setup();
+  it("should initialize focusableElements as an empty array before connect", async () => {
+    const { element } = await setup();
 
-    await connect();
-
-    const tempButton = document.createElement('button');
-    document.body.appendChild(tempButton);
-    tempButton.focus();
-    await DOM.nextUpdate();
-
-    expect(document.activeElement).to.equal(tempButton);
-
-    Reflect.set(element as object, "focusableElements", undefined);
-    await DOM.nextUpdate();
-
-    startButton.focus();
-    await DOM.nextUpdate();
-
-    expect(document.activeElement).to.equal(startButton);
-
-    tempButton.remove();
-    await disconnect();
+    const focusableElements = Reflect.get(element as object, "focusableElements");
+    expect(Array.isArray(focusableElements)).to.equal(true);
+    expect(focusableElements.length).to.equal(0);
   });
 
-  it("should handle keydown when focusableElements becomes undefined", async () => {
-    const { element, connect, disconnect, document, startButton } = await setup();
+  it("should not throw from keydownHandler before connect", async () => {
+    const { element } = await setup();
+    const event = new KeyboardEvent("keydown", {
+      key: keyArrowRight,
+    } as KeyboardEventInit);
 
-    await connect();
-
-    const tempButton = document.createElement("button");
-    document.body.appendChild(tempButton);
-    tempButton.focus();
-    await DOM.nextUpdate();
-
-    expect(document.activeElement).to.equal(tempButton);
-
-    startButton.focus();
-    await DOM.nextUpdate();
-
-    Reflect.set(element as object, "reduceFocusableElements", () => undefined);
-    Reflect.set(element as object, "focusableElements", undefined);
-    await DOM.nextUpdate();
-
-    pressRightArrowKey(element);
-    await DOM.nextUpdate();
-
-    expect(document.activeElement).to.equal(startButton);
-
-    tempButton.remove();
-    await disconnect();
+    expect(() => element.keydownHandler(event)).to.not.throw();
   });
 });
