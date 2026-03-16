@@ -133,7 +133,7 @@ export class Toolbar extends FoundationElement {
      * @internal
      */
     public mouseDownHandler(e: MouseEvent): boolean | void {
-        const activeIndex = this.focusableElements?.findIndex(x =>
+        const activeIndex = this.focusableElements.findIndex(x =>
             x.contains(e.target as HTMLElement)
         );
         if (activeIndex > -1 && this.activeIndex !== activeIndex) {
@@ -233,7 +233,7 @@ export class Toolbar extends FoundationElement {
      * @internal
      */
     protected reduceFocusableElements(): void {
-        const previousFocusedElement = this.focusableElements?.[this.activeIndex];
+        const previousFocusedElement = this.focusableElements[this.activeIndex];
 
         this.focusableElements = this.allSlottedItems.reduce(
             Toolbar.reduceFocusableItems,
