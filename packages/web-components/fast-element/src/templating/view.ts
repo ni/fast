@@ -136,16 +136,16 @@ export class HTMLView implements ElementView, SyntheticView {
      * @param node - The node to insert the view's DOM before.
      */
     public insertBefore(node: Node): void {
+        if (!node.parentNode) {
+            return;
+        }
         if (this.fragment.hasChildNodes()) {
-            if (!node.parentNode) {
-                return;
-            }
             node.parentNode.insertBefore(this.fragment, node);
         } else {
             const end = this.lastChild!;
             if (node.previousSibling === end) return;
 
-            const parentNode = node.parentNode!;
+            const parentNode = node.parentNode;
             let current = this.firstChild!;
             let next;
 
