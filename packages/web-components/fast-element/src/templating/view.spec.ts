@@ -1,41 +1,42 @@
-import { expect } from "chai";
-import type { Behavior } from "../observation/behavior";
-import { HTMLView } from "./view";
+import chai, { expect } from "chai";
 import spies from "chai-spies";
+import { HTMLView } from "./view";
 
 chai.use(spies);
 
 describe("The HTMLView", () => {
-    function createFragment(...nodes: Node[]): DocumentFragment {
-        const fragment = document.createDocumentFragment();
-        for (const node of nodes) {
-            fragment.appendChild(node);
-        }
-        return fragment;
-    }
+	describe("disposeContiguousBatch", () => {
+		function createViewWithDisposeSpy(onDispose: () => void) {
+			const fragment = document.createDocumentFragment();
+			fragment.appendChild(document.createComment("start"));
+			fragment.appendChild(document.createComment("end"));
 
-    function createView(
-        nodes: Node[],
-        behaviors: Behavior[] = []
-    ): HTMLView {
-        return new HTMLView(createFragment(...nodes), behaviors);
-    }
+			const view = new HTMLView(fragment, []);
+			const disposeSpy = chai.spy(onDispose);
+			chai.spy.on(view, "dispose", disposeSpy);
 
-    it('disposeContiguousBatch disposes all views', () => {
-        const viewCount = 10;
-        const views: HTMLView[] = [];
-        const disposeSpies: ChaiSpies.Spy[] = [];
-        for (let i = 0; i < viewCount; i++) {
-            const span = document.createElement("span");
-            const view = createView([span]);
-            views.push(view);
-            disposeSpies.push(chai.spy.on(view, "dispose"));
-        }
+			return { view, disposeSpy };
+		}
 
-        HTMLView.disposeContiguousBatch(views);
+		it("returns without throwing when given an empty batch", () => {
+			expect(() => HTMLView.disposeContiguousBatch([])).not.to.throw();
+		});
 
-        for (const spy of disposeSpies) {
-            expect(spy).to.have.been.called.exactly(1);
-        }
-    });
+		it("disposes each view in the provided batch", () => {
+			const view1 = createViewWithDisposeSpy(() => {});
+			const view2 = createViewWithDisposeSpy(() => {});
+			const view3 = createViewWithDisposeSpy(() => {});
+			const views = [
+				view1.view,
+				view2.view,
+				view3.view,
+			];
+
+			HTMLView.disposeContiguousBatch(views);
+
+			expect(view1.disposeSpy).to.have.been.called.once;
+			expect(view2.disposeSpy).to.have.been.called.once;
+			expect(view3.disposeSpy).to.have.been.called.once;
+		});
+	});
 });
