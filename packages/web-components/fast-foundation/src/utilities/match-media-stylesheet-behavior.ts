@@ -170,11 +170,41 @@ export class MatchMediaStyleSheetBehavior extends MatchMediaBehavior {
 }
 
 /**
+ * Safely constructs a MediaQueryList for the provided query. When executed in a
+ * non-browser environment (e.g. server-side rendering) where `window` is not
+ * available, a no-op stub is returned so that module evaluation does not throw.
+ */
+function safeMatchMedia(query: string): MediaQueryList {
+    if (typeof window !== "undefined" && typeof window.matchMedia === "function") {
+        return window.matchMedia(query);
+    }
+
+    return {
+        matches: false,
+        media: query,
+        onchange: null,
+        addListener: () => {
+            /* no-op */
+        },
+        removeListener: () => {
+            /* no-op */
+        },
+        addEventListener: () => {
+            /* no-op */
+        },
+        removeEventListener: () => {
+            /* no-op */
+        },
+        dispatchEvent: () => false,
+    } as unknown as MediaQueryList;
+}
+
+/**
  * This can be used to construct a behavior to apply a forced-colors only stylesheet.
  * @public
  */
 export const forcedColorsStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
-    window.matchMedia("(forced-colors)")
+    safeMatchMedia("(forced-colors)")
 );
 
 /**
@@ -182,7 +212,7 @@ export const forcedColorsStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
  * @public
  */
 export const darkModeStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
-    window.matchMedia("(prefers-color-scheme: dark)")
+    safeMatchMedia("(prefers-color-scheme: dark)")
 );
 
 /**
@@ -190,5 +220,5 @@ export const darkModeStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
  * @public
  */
 export const lightModeStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
-    window.matchMedia("(prefers-color-scheme: light)")
+    safeMatchMedia("(prefers-color-scheme: light)")
 );

@@ -9,7 +9,10 @@ import {
     prependToAdoptedStyleSheetsSymbol,
 } from "@ni/fast-element";
 
-export const defaultElement = document.createElement("div");
+export const defaultElement =
+    typeof document !== "undefined"
+        ? document.createElement("div")
+        : ({} as HTMLElement);
 
 function isFastElement(element: HTMLElement | FASTElement): element is FASTElement {
     return element instanceof FASTElement;
@@ -228,7 +231,10 @@ export class RootStyleSheetTarget implements PropertyTarget {
      * @param root - the root to normalize
      */
     private static normalizeRoot(root: HTMLElement | Document) {
-        return root === defaultElement ? document : root;
+        if (root === defaultElement) {
+            return typeof document !== "undefined" ? document : root;
+        }
+        return root;
     }
 }
 
@@ -237,6 +243,16 @@ const propertyTargetCache: WeakMap<
     HTMLElement | Document,
     PropertyTarget
 > = new WeakMap();
+// No-op target used in non-browser (SSR) environments where CSS custom
+// properties cannot be applied because there is no document.
+const noopPropertyTarget: PropertyTarget = {
+    setProperty(): void {
+        /* no-op */
+    },
+    removeProperty(): void {
+        /* no-op */
+    },
+};
 // Use Constructable StyleSheets for FAST elements when supported, otherwise use
 // HTMLStyleElement instances
 const propertyTargetCtor: Constructable<PropertyTarget> = DOM.supportsAdoptedStyleSheets
@@ -250,6 +266,10 @@ const propertyTargetCtor: Constructable<PropertyTarget> = DOM.supportsAdoptedSty
  */
 export const PropertyTargetManager = Object.freeze({
     getOrCreate(source: HTMLElement | Document): PropertyTarget {
+        if (typeof document === "undefined") {
+            return noopPropertyTarget;
+        }
+
         if (propertyTargetCache.has(source)) {
             /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
             return propertyTargetCache.get(source)!;
