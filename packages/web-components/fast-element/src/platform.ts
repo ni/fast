@@ -104,68 +104,23 @@ if ($global.trustedTypes === void 0) {
     $global.trustedTypes = { createPolicy: (n: string, r: TrustedTypesPolicy) => r };
 }
 
-// API-only shims for server-side rendering (SSR) environments where the DOM is
-// unavailable. Custom element classes extend `HTMLElement` and register
-// themselves via `customElements` during module evaluation, so these globals
-// must exist for modules to load without throwing. The shims are intentionally
-// minimal no-ops; real rendering happens on the client after hydration.
-if (typeof (($global as any).HTMLElement) === "undefined") {
-    ($global as any).HTMLElement = class HTMLElement {};
-}
-
-// Minimal stubs for DOM classes referenced via `instanceof`/`extends` during
-// module evaluation. These only need to exist as constructors so that
-// `instanceof` checks return false and class extension succeeds server-side.
-for (const name of ["Node", "Element", "ShadowRoot", "Event", "CustomEvent"]) {
+// Shims of globals for SSR environments that load client code in the server module graph
+for (const name of [
+    "Node",
+    "Element",
+    "HTMLElement",
+    "ShadowRoot",
+    "Event",
+    "CustomEvent",
+    "MutationObserver",
+    "ResizeObserver",
+    "IntersectionObserver",
+    "CSSStyleSheet"
+]) {
     if (typeof (($global as any)[name]) === "undefined") {
         ($global as any)[name] = class {};
     }
 }
-
-// Observer classes are sometimes constructed at module-evaluation time. Provide
-// inert stubs server-side; observation only matters on the client. Note we do
-// NOT shim `window`/`document` because doing so flips `typeof window`-style SSR
-// feature detection in other libraries (React, etc.). Those reads stay guarded.
-for (const name of ["MutationObserver", "ResizeObserver", "IntersectionObserver"]) {
-    if (typeof (($global as any)[name]) === "undefined") {
-        ($global as any)[name] = class {
-            public observe(): void {
-                /* no-op */
-            }
-
-            public unobserve(): void {
-                /* no-op */
-            }
-
-            public disconnect(): void {
-                /* no-op */
-            }
-
-            public takeRecords(): unknown[] {
-                return [];
-            }
-        };
-    }
-}
-
-if (typeof (($global as any).CSSStyleSheet) === "undefined") {
-    ($global as any).CSSStyleSheet = class CSSStyleSheet {
-        public replace(): Promise<void> {
-            return Promise.resolve();
-        }
-        public replaceSync(): void {
-            /* no-op */
-        }
-    };
-}
-
-if (typeof (($global as any).CSS) === "undefined") {
-    ($global as any).CSS = {
-        supports: () => false,
-        escape: (value: string) => String(value),
-    };
-}
-
 if (typeof (($global as any).customElements) === "undefined") {
     const definitionsByName = new Map<string, Function>();
     const namesByConstructor = new Map<Function, string>();
@@ -186,7 +141,7 @@ if (typeof (($global as any).customElements) === "undefined") {
             return Promise.resolve();
         },
         upgrade(): void {
-            /* no-op */
+            // no-op
         },
     };
 }
