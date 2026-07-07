@@ -9,10 +9,7 @@ import {
     prependToAdoptedStyleSheetsSymbol,
 } from "@ni/fast-element";
 
-export const defaultElement =
-    typeof document === "undefined"
-        ? ({} as HTMLElement)
-        : document.createElement("div");
+export const defaultElement = typeof document === "undefined" ? ({} as HTMLElement) : document.createElement("div");
 
 function isFastElement(element: HTMLElement | FASTElement): element is FASTElement {
     return element instanceof FASTElement;
@@ -231,7 +228,7 @@ export class RootStyleSheetTarget implements PropertyTarget {
      * @param root - the root to normalize
      */
     private static normalizeRoot(root: HTMLElement | Document) {
-         return root === defaultElement ? document : root;
+        return root === defaultElement ? document : root;
     }
 }
 
