@@ -121,6 +121,7 @@ for (const name of [
         ($global as any)[name] = class {};
     }
 }
+// Minimal custom elements registry for the react wrapper to leverage for tag names
 if (typeof (($global as any).customElements) === "undefined") {
     const definitionsByName = new Map<string, Function>();
     const namesByConstructor = new Map<Function, string>();
