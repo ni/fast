@@ -10,9 +10,9 @@ import {
 } from "@ni/fast-element";
 
 export const defaultElement =
-    typeof document !== "undefined"
-        ? document.createElement("div")
-        : ({} as HTMLElement);
+    typeof document === "undefined"
+        ? ({} as HTMLElement)
+        : document.createElement("div");
 
 function isFastElement(element: HTMLElement | FASTElement): element is FASTElement {
     return element instanceof FASTElement;
@@ -231,10 +231,7 @@ export class RootStyleSheetTarget implements PropertyTarget {
      * @param root - the root to normalize
      */
     private static normalizeRoot(root: HTMLElement | Document) {
-        if (root === defaultElement) {
-            return typeof document !== "undefined" ? document : root;
-        }
-        return root;
+         return root === defaultElement ? document : root;
     }
 }
 
@@ -243,16 +240,6 @@ const propertyTargetCache: WeakMap<
     HTMLElement | Document,
     PropertyTarget
 > = new WeakMap();
-// No-op target used in non-browser (SSR) environments where CSS custom
-// properties cannot be applied because there is no document.
-const noopPropertyTarget: PropertyTarget = {
-    setProperty(): void {
-        /* no-op */
-    },
-    removeProperty(): void {
-        /* no-op */
-    },
-};
 // Use Constructable StyleSheets for FAST elements when supported, otherwise use
 // HTMLStyleElement instances
 const propertyTargetCtor: Constructable<PropertyTarget> = DOM.supportsAdoptedStyleSheets
@@ -267,7 +254,10 @@ const propertyTargetCtor: Constructable<PropertyTarget> = DOM.supportsAdoptedSty
 export const PropertyTargetManager = Object.freeze({
     getOrCreate(source: HTMLElement | Document): PropertyTarget {
         if (typeof document === "undefined") {
-            return noopPropertyTarget;
+            return {
+                setProperty(): void { /* no-op */ },
+                removeProperty(): void { /* no-op */ },
+            };
         }
 
         if (propertyTargetCache.has(source)) {
