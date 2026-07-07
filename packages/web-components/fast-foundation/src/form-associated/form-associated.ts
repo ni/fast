@@ -97,7 +97,7 @@ const ElementInternalsKey = "ElementInternals";
 export const supportsElementInternals =
     typeof window !== "undefined" &&
     ElementInternalsKey in window &&
-    "setFormValue" in (window as any)[ElementInternalsKey].prototype;
+    "setFormValue" in window[ElementInternalsKey].prototype;
 
 const InternalsMap = new WeakMap();
 
