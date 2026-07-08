@@ -2,7 +2,7 @@
   "name": "@ni/fast-element",
   "description": "A library for constructing Web Components",
   "sideEffects": false,
-  "version": "10.1.1",
+  "version": "10.1.2",
   "author": {
     "name": "National Instruments"
   },

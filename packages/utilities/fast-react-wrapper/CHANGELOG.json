@@ -2,6 +2,27 @@
   "name": "@ni/fast-react-wrapper",
   "entries": [
     {
+      "date": "Wed, 08 Jul 2026 18:23:16 GMT",
+      "version": "10.1.11",
+      "tag": "@ni/fast-react-wrapper_v10.1.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@ni/fast-react-wrapper",
+            "comment": "Bump @ni/fast-element to v10.1.2",
+            "commit": "not available"
+          },
+          {
+            "author": "beachball",
+            "package": "@ni/fast-react-wrapper",
+            "comment": "Bump @ni/fast-foundation to v10.2.4",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Apr 2026 15:27:53 GMT",
       "version": "10.1.10",
       "tag": "@ni/fast-react-wrapper_v10.1.10",

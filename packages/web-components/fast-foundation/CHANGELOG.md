@@ -1,8 +1,17 @@
 # Change Log - @ni/fast-foundation
 
-<!-- This log was last generated on Tue, 14 Apr 2026 15:27:53 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 08 Jul 2026 18:23:16 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 10.2.4
+
+Wed, 08 Jul 2026 18:23:16 GMT
+
+### Patches
+
+- Enable browser global shims for SSR module loading ([ni/fast@8ae8661](https://github.com/ni/fast/commit/8ae866182e611b958d74b9d3f029c11f42c988c6))
+- Bump @ni/fast-element to v10.1.2
 
 ## 10.2.3
 
