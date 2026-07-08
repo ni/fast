@@ -228,10 +228,7 @@ export class RootStyleSheetTarget implements PropertyTarget {
      * @param root - the root to normalize
      */
     private static normalizeRoot(root: HTMLElement | Document) {
-        if (root === defaultElement) {
-            return typeof document === "undefined" ? root : document;
-        }
-        return root;
+        return (root === defaultElement && typeof document !== "undefined") ? document : root;
     }
 }
 
