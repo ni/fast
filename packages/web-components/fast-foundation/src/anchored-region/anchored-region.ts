@@ -426,12 +426,12 @@ export class AnchoredRegion extends FoundationElement {
      */
     public disconnectedCallback(): void {
         super.disconnectedCallback();
-        this.ancestorDialog = null;
         if (this.autoUpdateMode === "auto") {
             this.stopAutoUpdateEventListeners();
         }
         this.stopObservers();
         this.disconnectResizeDetector();
+        this.ancestorDialog = null;
     }
 
     /**
@@ -1319,9 +1319,9 @@ export class AnchoredRegion extends FoundationElement {
      * starts event listeners that can trigger auto updating
      */
     private startAutoUpdateEventListeners = (): void => {
-        const eventTarget = this.ancestorDialog ?? window;
-        eventTarget.addEventListener(eventResize, this.update, { passive: true });
-        eventTarget.addEventListener(eventScroll, this.update, {
+        const windowOrDialog = this.ancestorDialog ?? window;
+        window.addEventListener(eventResize, this.update, { passive: true });
+        windowOrDialog.addEventListener(eventScroll, this.update, {
             passive: true,
             capture: true,
         });
@@ -1334,9 +1334,11 @@ export class AnchoredRegion extends FoundationElement {
      * stops event listeners that can trigger auto updating
      */
     private stopAutoUpdateEventListeners = (): void => {
-        const eventTarget = this.ancestorDialog ?? window;
-        eventTarget.removeEventListener(eventResize, this.update);
-        eventTarget.removeEventListener(eventScroll, this.update);
+        const windowOrDialog = this.ancestorDialog ?? window;
+        window.removeEventListener(eventResize, this.update);
+        windowOrDialog.removeEventListener(eventScroll, this.update, {
+            capture: true,
+        });
         if (this.resizeDetector !== null && this.viewportElement !== null) {
             this.resizeDetector.unobserve(this.viewportElement);
         }

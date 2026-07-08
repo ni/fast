@@ -1,7 +1,10 @@
-import { expect } from "chai";
+import chai, { expect } from "chai";
+import spies from "chai-spies";
 import { AnchoredRegion, anchoredRegionTemplate as template } from "./index";
 import { fixture } from "../test-utilities/fixture";
 import { DOM } from "@ni/fast-element";
+
+chai.use(spies);
 
 const FASTAnchoredRegion = AnchoredRegion.compose({
     baseName: "anchored-region",
@@ -66,5 +69,36 @@ describe("Anchored Region", () => {
         expect(element.clientWidth).to.equal(content.clientWidth);
 
         await disconnect();
+    });
+
+    it("should attach scroll listeners to ancestor dialog on connect and remove them on disconnect", async () => {
+        const dialog = document.createElement("dialog");
+        dialog.id = "dialog-viewport";
+
+        const { element, connect, disconnect } = await fixture(FASTAnchoredRegion(), { parent: dialog });
+
+        const button = document.createElement("button");
+        button.id = "dialog-anchor";
+        dialog.insertBefore(button, element);
+
+        element.setAttribute("anchor", "dialog-anchor");
+        element.setAttribute("viewport", "dialog-viewport");
+        element.setAttribute("auto-update-mode", "auto");
+
+        const addListenerSpy = chai.spy.on(dialog, "addEventListener");
+
+        await connect();
+
+        expect(addListenerSpy).to.have.been.called.with("scroll");
+
+        chai.spy.restore(dialog, "addEventListener");
+
+        const removeListenerSpy = chai.spy.on(dialog, "removeEventListener");
+
+        await disconnect();
+
+        expect(removeListenerSpy).to.have.been.called.with("scroll");
+
+        chai.spy.restore(dialog, "removeEventListener");
     });
 });

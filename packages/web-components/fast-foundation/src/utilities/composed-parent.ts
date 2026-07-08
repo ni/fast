@@ -4,6 +4,7 @@
  * element of the shadow root. Otherwise it will return the parent node or null if
  * no parent node exists.
  * @param element - The element for which to retrieve the composed parent
+ * @param asSlotted - When true, returns the element's assignedSlot (if any) as the composed parent.
  *
  * @public
  */
@@ -26,6 +27,7 @@ function shadowDomHost(element: HTMLElement): HTMLElement | null {
     return null;
 }
 
+/** @internal */
 export function closestAncestorDialog(element: HTMLElement): HTMLDialogElement | null {
     let node: HTMLElement | null = composedParent(element, true);
     while (node) {
