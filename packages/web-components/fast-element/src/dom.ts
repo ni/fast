@@ -94,6 +94,8 @@ export const DOM = Object.freeze({
      * Indicates whether the DOM supports the adoptedStyleSheets feature.
      */
     supportsAdoptedStyleSheets:
+        typeof document !== "undefined" &&
+        typeof CSSStyleSheet !== "undefined" &&
         Array.isArray((document as any).adoptedStyleSheets) &&
         "replace" in CSSStyleSheet.prototype,
 

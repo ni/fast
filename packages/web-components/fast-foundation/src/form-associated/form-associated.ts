@@ -95,6 +95,7 @@ const ElementInternalsKey = "ElementInternals";
  * @alpha
  */
 export const supportsElementInternals =
+    typeof window !== "undefined" &&
     ElementInternalsKey in window &&
     "setFormValue" in window[ElementInternalsKey].prototype;
 

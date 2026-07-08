@@ -9,7 +9,7 @@ import {
     prependToAdoptedStyleSheetsSymbol,
 } from "@ni/fast-element";
 
-export const defaultElement = document.createElement("div");
+export const defaultElement = typeof document === "undefined" ? ({} as HTMLElement) : document.createElement("div");
 
 function isFastElement(element: HTMLElement | FASTElement): element is FASTElement {
     return element instanceof FASTElement;
@@ -228,7 +228,7 @@ export class RootStyleSheetTarget implements PropertyTarget {
      * @param root - the root to normalize
      */
     private static normalizeRoot(root: HTMLElement | Document) {
-        return root === defaultElement ? document : root;
+        return (root === defaultElement && typeof document !== "undefined") ? document : root;
     }
 }
 
@@ -250,6 +250,13 @@ const propertyTargetCtor: Constructable<PropertyTarget> = DOM.supportsAdoptedSty
  */
 export const PropertyTargetManager = Object.freeze({
     getOrCreate(source: HTMLElement | Document): PropertyTarget {
+        if (typeof document === "undefined") {
+            return {
+                setProperty(): void { /* no-op */ },
+                removeProperty(): void { /* no-op */ },
+            };
+        }
+
         if (propertyTargetCache.has(source)) {
             /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
             return propertyTargetCache.get(source)!;
