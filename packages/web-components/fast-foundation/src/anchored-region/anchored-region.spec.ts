@@ -11,8 +11,8 @@ const FASTAnchoredRegion = AnchoredRegion.compose({
     template
 })
 
-async function setup() {
-    const { element, connect, disconnect, parent } = await fixture(FASTAnchoredRegion());
+async function setup(parentElement?: HTMLElement) {
+    const { element, connect, disconnect, parent } = await fixture(FASTAnchoredRegion(), { parent: parentElement });
 
     const button = document.createElement("button");
     const content = document.createElement("div");
@@ -30,12 +30,15 @@ async function setup() {
     element.appendChild(content);
     element.setAttribute("viewport", "viewport");
     element.setAttribute("anchor", "anchor");
+    element.setAttribute("auto-update-mode", "auto");
     element.id = "region";
 
     return { element, connect, disconnect, content };
 }
 
 describe("Anchored Region", () => {
+    afterEach(() => chai.spy.restore());
+
     it("should set positioning modes to 'uncontrolled' by default", async () => {
         const { element, connect, disconnect } = await setup();
 
@@ -71,34 +74,89 @@ describe("Anchored Region", () => {
         await disconnect();
     });
 
-    it("should attach scroll listeners to ancestor dialog on connect and remove them on disconnect", async () => {
-        const dialog = document.createElement("dialog");
-        dialog.id = "dialog-viewport";
+    interface ScrollListenerTestOptions {
+        createParent: () => HTMLElement,
+        show: (parent: HTMLElement) => void,
+        hide: (parent: HTMLElement) => void,
+        expectListensOnParent: boolean
+    }
 
-        const { element, connect, disconnect } = await fixture(FASTAnchoredRegion(), { parent: dialog });
+    async function scrollListenerTest({ createParent, show, hide, expectListensOnParent }: ScrollListenerTestOptions) {
+        const parent = createParent();
+        const { element, connect, disconnect } = await setup(parent);
 
-        const button = document.createElement("button");
-        button.id = "dialog-anchor";
-        dialog.insertBefore(button, element);
+        // We will re-attach the anchored region after displaying the parent.
+        element.remove();
 
-        element.setAttribute("anchor", "dialog-anchor");
-        element.setAttribute("viewport", "dialog-viewport");
-        element.setAttribute("auto-update-mode", "auto");
-
-        const addListenerSpy = chai.spy.on(dialog, "addEventListener");
+        const parentAddListenerSpy = chai.spy.on(parent, "addEventListener");
+        const parentRemoveListenerSpy = chai.spy.on(parent, "removeEventListener");
+        const windowAddListenerSpy = chai.spy.on(window, "addEventListener");
+        const windowRemoveListenerSpy = chai.spy.on(window, "removeEventListener");
 
         await connect();
-
-        expect(addListenerSpy).to.have.been.called.with("scroll");
-
-        chai.spy.restore(dialog, "addEventListener");
-
-        const removeListenerSpy = chai.spy.on(dialog, "removeEventListener");
-
+        show(parent);
+        parent.appendChild(element);
+        hide(parent);
         await disconnect();
 
-        expect(removeListenerSpy).to.have.been.called.with("scroll");
+        const expectedAddSpy = expectListensOnParent ? parentAddListenerSpy : windowAddListenerSpy;
+        const expectedRemoveSpy = expectListensOnParent ? parentRemoveListenerSpy : windowRemoveListenerSpy;
+        const notExpectedAddSpy = expectListensOnParent ? windowAddListenerSpy : parentAddListenerSpy;
+        const notExpectedRemoveSpy = expectListensOnParent ? windowRemoveListenerSpy : parentRemoveListenerSpy;
 
-        chai.spy.restore(dialog, "removeEventListener");
+        expect(notExpectedRemoveSpy).not.to.have.been.called.with("scroll");
+        expect(notExpectedAddSpy).not.to.have.been.called.with("scroll");
+        expect(expectedAddSpy).to.have.been.called.with("scroll");
+        expect(expectedRemoveSpy).to.have.been.called.with("scroll");
+    }
+
+    it("should attach/detach scroll listener to ancestor modal dialog instead of window", async () => {
+        await scrollListenerTest({
+            createParent: () => document.createElement("dialog"),
+            show: (dialog: HTMLDialogElement) => dialog.showModal(),
+            hide: (dialog: HTMLDialogElement) => dialog.close(),
+            expectListensOnParent: true
+        });
+    });
+
+    it("should attach scroll listener to window when ancestor dialog is not modal", async () => {
+        await scrollListenerTest({
+            createParent: () => document.createElement("dialog"),
+            show: (dialog: HTMLDialogElement) => dialog.show(),
+            hide: (dialog: HTMLDialogElement) => dialog.close(),
+            expectListensOnParent: false
+        });
+    });
+
+    it("should attach/detach scroll listener to ancestor open popover instead of window", async () => {
+        await scrollListenerTest({
+            createParent: () => {
+                const div = document.createElement("div");
+                div.setAttribute("popover", "");
+                return div;
+            },
+            show: (element) => element.showPopover(),
+            hide: (element) => element.hidePopover(),
+            expectListensOnParent: true
+        });
+    });
+
+    it("should attach/detach scroll listener to ancestor fullscreen element instead of window", async () => {
+        await scrollListenerTest({
+            createParent: () => document.createElement("div"),
+            show: (element) => {
+                Object.defineProperty(document, "fullscreenElement", {
+                    get: () => element,
+                    configurable: true,
+                });
+            },
+            hide: () => {
+                Object.defineProperty(document, "fullscreenElement", {
+                    get: () => null,
+                    configurable: true,
+                });
+            },
+            expectListensOnParent: true
+        });
     });
 });

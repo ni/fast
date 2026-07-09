@@ -1,7 +1,7 @@
 import { attr, DOM, observable } from "@ni/fast-element";
 import { Direction, eventResize, eventScroll } from "@ni/fast-web-utilities";
 import { FoundationElement } from "../foundation-element/foundation-element.js";
-import { closestAncestorDialog } from "../utilities/composed-parent.js";
+import { topLayerRootAncestor } from "../utilities/composed-parent.js";
 import { getDirection } from "../utilities/direction.js";
 import { IntersectionService } from "../utilities/intersection-service.js";
 import type {
@@ -405,7 +405,7 @@ export class AnchoredRegion extends FoundationElement {
     // justify a layout update that affects the dom (prevents repeated sub-pixel corrections)
     private updateThreshold: number = 0.5;
 
-    private ancestorDialog: HTMLDialogElement | null = null;
+    private topLayerRootAncestor: HTMLElement | null = null;
 
     private static intersectionService: IntersectionService = new IntersectionService();
 
@@ -414,7 +414,7 @@ export class AnchoredRegion extends FoundationElement {
      */
     connectedCallback() {
         super.connectedCallback();
-        this.ancestorDialog = closestAncestorDialog(this);
+        this.topLayerRootAncestor = topLayerRootAncestor(this);
         if (this.autoUpdateMode === "auto") {
             this.startAutoUpdateEventListeners();
         }
@@ -431,7 +431,7 @@ export class AnchoredRegion extends FoundationElement {
         }
         this.stopObservers();
         this.disconnectResizeDetector();
-        this.ancestorDialog = null;
+        this.topLayerRootAncestor = null;
     }
 
     /**
@@ -1319,9 +1319,9 @@ export class AnchoredRegion extends FoundationElement {
      * starts event listeners that can trigger auto updating
      */
     private startAutoUpdateEventListeners = (): void => {
-        const windowOrDialog = this.ancestorDialog ?? window;
         window.addEventListener(eventResize, this.update, { passive: true });
-        windowOrDialog.addEventListener(eventScroll, this.update, {
+        const scrollListenerTarget = this.topLayerRootAncestor ?? window;
+        scrollListenerTarget.addEventListener(eventScroll, this.update, {
             passive: true,
             capture: true,
         });
@@ -1334,9 +1334,9 @@ export class AnchoredRegion extends FoundationElement {
      * stops event listeners that can trigger auto updating
      */
     private stopAutoUpdateEventListeners = (): void => {
-        const windowOrDialog = this.ancestorDialog ?? window;
         window.removeEventListener(eventResize, this.update);
-        windowOrDialog.removeEventListener(eventScroll, this.update, {
+        const scrollListenerTarget = this.topLayerRootAncestor ?? window;
+        scrollListenerTarget.removeEventListener(eventScroll, this.update, {
             capture: true,
         });
         if (this.resizeDetector !== null && this.viewportElement !== null) {

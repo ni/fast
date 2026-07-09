@@ -28,13 +28,19 @@ function shadowDomHost(element: HTMLElement): HTMLElement | null {
 }
 
 /** @internal */
-export function closestAncestorDialog(element: HTMLElement): HTMLDialogElement | null {
-    let node: HTMLElement | null = composedParent(element, true);
-    while (node) {
-        if (node instanceof HTMLDialogElement) {
-            return node;
+export function topLayerRootAncestor(element: HTMLElement): HTMLElement | null {
+    let parentElement: HTMLElement | null = composedParent(element, true);
+    while (parentElement) {
+        if (isTopLayerRoot(parentElement)) {
+            return parentElement;
         }
-        node = composedParent(node, true);
+        parentElement = composedParent(parentElement, true);
     }
     return null;
+}
+
+function isTopLayerRoot(element: HTMLElement): boolean {
+    return element.matches(':popover-open')
+        || element.matches(':modal')
+        || document.fullscreenElement === element;
 }
