@@ -2,6 +2,27 @@
   "name": "@ni/fast-foundation",
   "entries": [
     {
+      "date": "Wed, 08 Jul 2026 18:23:16 GMT",
+      "version": "10.2.4",
+      "tag": "@ni/fast-foundation_v10.2.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "1588923+rajsite@users.noreply.github.com",
+            "package": "@ni/fast-foundation",
+            "commit": "8ae866182e611b958d74b9d3f029c11f42c988c6",
+            "comment": "Enable browser global shims for SSR module loading"
+          },
+          {
+            "author": "beachball",
+            "package": "@ni/fast-foundation",
+            "comment": "Bump @ni/fast-element to v10.1.2",
+            "commit": "not available"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Apr 2026 15:27:53 GMT",
       "version": "10.2.3",
       "tag": "@ni/fast-foundation_v10.2.3",

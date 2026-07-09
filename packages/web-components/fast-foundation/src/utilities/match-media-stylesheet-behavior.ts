@@ -168,27 +168,3 @@ export class MatchMediaStyleSheetBehavior extends MatchMediaBehavior {
         (source as any).$fastController.removeStyles(this.styles);
     }
 }
-
-/**
- * This can be used to construct a behavior to apply a forced-colors only stylesheet.
- * @public
- */
-export const forcedColorsStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
-    window.matchMedia("(forced-colors)")
-);
-
-/**
- * This can be used to construct a behavior to apply a prefers color scheme: dark only stylesheet.
- * @public
- */
-export const darkModeStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
-    window.matchMedia("(prefers-color-scheme: dark)")
-);
-
-/**
- * This can be used to construct a behavior to apply a prefers color scheme: light only stylesheet.
- * @public
- */
-export const lightModeStylesheetBehavior = MatchMediaStyleSheetBehavior.with(
-    window.matchMedia("(prefers-color-scheme: light)")
-);

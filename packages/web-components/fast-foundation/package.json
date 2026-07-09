@@ -2,7 +2,7 @@
   "name": "@ni/fast-foundation",
   "description": "A library of Web Component building blocks",
   "sideEffects": false,
-  "version": "10.2.3",
+  "version": "10.2.4",
   "author": {
     "name": "National Instruments"
   },
@@ -25,7 +25,7 @@
     "pack": "npm pack",
     "lint": "npm run eslint",
     "format": "npm run eslint:fix",
-    "test": "npm run test-chrome:verbose",
+    "test": "npm run test-chrome:verbose && npm run test-node-smoke-test",
     "clean:dist": "rimraf dist",
     "doc": "api-extractor run --local",
     "build:rollup": "rollup --bundleConfigAsCjs -c",
@@ -48,7 +48,8 @@
     "test-chrome:verbose:debugger": "karma start karma.conf.cjs --browsers=ChromeDebugging --reporter=mocha",
     "test-firefox": "karma start karma.conf.cjs --browsers=FirefoxHeadless --single-run",
     "test-firefox:verbose": "karma start karma.conf.cjs --browsers=FirefoxHeadless --single-run --reporter=mocha",
-    "test-firefox:watch": "karma start karma.conf.cjs --browsers=FirefoxHeadless --watch-extensions js"
+    "test-firefox:watch": "karma start karma.conf.cjs --browsers=FirefoxHeadless --watch-extensions js",
+    "test-node-smoke-test": "node node-smoke-test.mjs"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.11.0",
@@ -90,7 +91,7 @@
     "webpack": "^5.97.1"
   },
   "dependencies": {
-    "@ni/fast-element": "^10.1.1",
+    "@ni/fast-element": "^10.1.2",
     "@ni/fast-web-utilities": "^10.0.4",
     "tabbable": "^6.2.0",
     "top-layer-observer": "^0.1.0",

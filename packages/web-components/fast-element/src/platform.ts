@@ -104,6 +104,50 @@ if ($global.trustedTypes === void 0) {
     $global.trustedTypes = { createPolicy: (n: string, r: TrustedTypesPolicy) => r };
 }
 
+// Shims of globals for SSR environments that load client code in the server module graph
+// Shim only what is not defined in-case SSR env is loading their own polyfills (which would need to be loaded first).
+for (const name of [
+    "Node",
+    "Element",
+    "HTMLElement",
+    "ShadowRoot",
+    "Event",
+    "CustomEvent",
+    "MutationObserver",
+    "ResizeObserver",
+    "IntersectionObserver",
+    "CSSStyleSheet"
+]) {
+    if (typeof (($global as any)[name]) === "undefined") {
+        ($global as any)[name] = class {};
+    }
+}
+// Minimal custom elements registry for the react wrapper to leverage for tag names
+if (typeof (($global as any).customElements) === "undefined") {
+    const constructorsByName = new Map<string, Function>();
+    const namesByConstructor = new Map<Function, string>();
+    ($global as any).customElements = {
+        define(name: string, constructor: Function): void {
+            if (!constructorsByName.has(name)) {
+                constructorsByName.set(name, constructor);
+                namesByConstructor.set(constructor, name);
+            }
+        },
+        get(name: string): Function | undefined {
+            return constructorsByName.get(name);
+        },
+        getName(constructor: Function): string | null {
+            return namesByConstructor.get(constructor) ?? null;
+        },
+        whenDefined(): Promise<void> {
+            return Promise.resolve();
+        },
+        upgrade(): void {
+            // no-op
+        },
+    };
+}
+
 const propConfig = {
     configurable: false,
     enumerable: false,
