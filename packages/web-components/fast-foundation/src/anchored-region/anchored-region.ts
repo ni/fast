@@ -1,5 +1,6 @@
 import { attr, DOM, observable } from "@ni/fast-element";
 import { Direction, eventResize, eventScroll } from "@ni/fast-web-utilities";
+import { TopLayerObserver } from "top-layer-observer";
 import { FoundationElement } from "../foundation-element/foundation-element.js";
 import { topLayerRootAncestor } from "../utilities/composed-parent.js";
 import { getDirection } from "../utilities/direction.js";
@@ -405,7 +406,8 @@ export class AnchoredRegion extends FoundationElement {
     // justify a layout update that affects the dom (prevents repeated sub-pixel corrections)
     private updateThreshold: number = 0.5;
 
-    private topLayerRootAncestor: HTMLElement | null = null;
+    private scrollListenerTarget: EventTarget = window;
+    private topLayerObserver: TopLayerObserver | null = null;
 
     private static intersectionService: IntersectionService = new IntersectionService();
 
@@ -414,7 +416,7 @@ export class AnchoredRegion extends FoundationElement {
      */
     connectedCallback() {
         super.connectedCallback();
-        this.topLayerRootAncestor = topLayerRootAncestor(this);
+        this.scrollListenerTarget = topLayerRootAncestor(this) ?? window;
         if (this.autoUpdateMode === "auto") {
             this.startAutoUpdateEventListeners();
         }
@@ -431,7 +433,6 @@ export class AnchoredRegion extends FoundationElement {
         }
         this.stopObservers();
         this.disconnectResizeDetector();
-        this.topLayerRootAncestor = null;
     }
 
     /**
@@ -1320,11 +1321,9 @@ export class AnchoredRegion extends FoundationElement {
      */
     private startAutoUpdateEventListeners = (): void => {
         window.addEventListener(eventResize, this.update, { passive: true });
-        const scrollListenerTarget = this.topLayerRootAncestor ?? window;
-        scrollListenerTarget.addEventListener(eventScroll, this.update, {
-            passive: true,
-            capture: true,
-        });
+        this.addScrollListener();
+        this.topLayerObserver ??= new TopLayerObserver(this.handleTopLayerChange);
+        this.topLayerObserver.observe();
         if (this.resizeDetector !== null && this.viewportElement !== null) {
             this.resizeDetector.observe(this.viewportElement);
         }
@@ -1334,13 +1333,33 @@ export class AnchoredRegion extends FoundationElement {
      * stops event listeners that can trigger auto updating
      */
     private stopAutoUpdateEventListeners = (): void => {
+        this.topLayerObserver?.disconnect();
         window.removeEventListener(eventResize, this.update);
-        const scrollListenerTarget = this.topLayerRootAncestor ?? window;
-        scrollListenerTarget.removeEventListener(eventScroll, this.update, {
-            capture: true,
-        });
+        this.removeScrollListener();
         if (this.resizeDetector !== null && this.viewportElement !== null) {
             this.resizeDetector.unobserve(this.viewportElement);
         }
+    };
+
+    private handleTopLayerChange = (): void => {
+        const newValue = topLayerRootAncestor(this) ?? window;
+        if (newValue !== this.scrollListenerTarget) {
+            this.removeScrollListener();
+            this.scrollListenerTarget = newValue;
+            this.addScrollListener();
+        }
+    };
+
+    private addScrollListener = (): void => {
+        this.scrollListenerTarget.addEventListener(eventScroll, this.update, {
+            passive: true,
+            capture: true,
+        });
+    };
+
+    private removeScrollListener = (): void => {
+        this.scrollListenerTarget.removeEventListener(eventScroll, this.update, {
+            capture: true,
+        });
     };
 }

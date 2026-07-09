@@ -159,4 +159,53 @@ describe("Anchored Region", () => {
             expectListensOnParent: true
         });
     });
+
+    async function topLayerTransitionTest(startInTopLayer: boolean) {
+        const dialog = document.createElement("dialog");
+        const { element, connect, disconnect } = await setup(dialog);
+
+        if (startInTopLayer) {
+            element.remove();
+            await connect();
+            dialog.showModal();
+            dialog.appendChild(element);
+        } else {
+            await connect();
+        }
+
+        const dialogAddListenerSpy = chai.spy.on(dialog, "addEventListener");
+        const dialogRemoveListenerSpy = chai.spy.on(dialog, "removeEventListener");
+        const windowAddListenerSpy = chai.spy.on(window, "addEventListener");
+        const windowRemoveListenerSpy = chai.spy.on(window, "removeEventListener");
+
+        if (startInTopLayer) {
+            // Move out of top layer
+            dialog.close();
+        } else {
+            // Move into top layer
+            dialog.showModal();
+        }
+        await DOM.nextUpdate();
+
+        const expectedRemoveSpy = startInTopLayer ? dialogRemoveListenerSpy : windowRemoveListenerSpy;
+        const expectedAddSpy = startInTopLayer ? windowAddListenerSpy : dialogAddListenerSpy;
+        const notExpectedAddSpy = startInTopLayer ? dialogAddListenerSpy : windowAddListenerSpy;
+        const notExpectedRemoveSpy = startInTopLayer ? windowRemoveListenerSpy : dialogRemoveListenerSpy;
+
+        expect(notExpectedRemoveSpy).not.to.have.been.called.with("scroll");
+        expect(notExpectedAddSpy).not.to.have.been.called.with("scroll");
+        expect(expectedRemoveSpy).to.have.been.called.with("scroll");
+        expect(expectedAddSpy).to.have.been.called.with("scroll");
+
+        dialog.close();
+        await disconnect();
+    }
+
+    it("should move scroll listener to dialog when it enters the top layer", async () => {
+        await topLayerTransitionTest(false);
+    });
+
+    it("should move scroll listener to window when dialog leaves the top layer", async () => {
+        await topLayerTransitionTest(true);
+    });
 });
