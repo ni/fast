@@ -11,7 +11,6 @@
     "packages/utilities/fast-eslint-rules",
     "packages/utilities/fast-colors",
     "packages/utilities/fast-web-utilities",
-    "packages/third-party/top-layer-observer",
     "packages/web-components/fast-element",
     "packages/web-components/fast-foundation",
     "packages/utilities/fast-react-wrapper"
