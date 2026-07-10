@@ -1,6 +1,6 @@
 import { attr, DOM, observable } from "@ni/fast-element";
 import { Direction, eventResize, eventScroll } from "@ni/fast-web-utilities";
-import { TopLayerObserver } from "top-layer-observer";
+import type { TopLayerCallback, TopLayerObserver } from "top-layer-observer";
 import { FoundationElement } from "../foundation-element/foundation-element.js";
 import { topLayerRootAncestor } from "../utilities/composed-parent.js";
 import { getDirection } from "../utilities/direction.js";
@@ -9,6 +9,12 @@ import type {
     ResizeObserverClassDefinition,
     ResizeObserverEntry,
 } from "../utilities/resize-observer.js";
+
+// The "top layer" does not exist in Node.js, and the top-layer-observer module crashes when loaded in Node.js.
+let topLayerObserverConstructor: (new (callback: TopLayerCallback) => TopLayerObserver) | undefined;
+if (typeof document !== "undefined") {
+    void import("top-layer-observer").then(m => topLayerObserverConstructor = m.TopLayerObserver);
+}
 
 /**
  * Defines the base behavior of an anchored region on a particular axis
@@ -1322,8 +1328,10 @@ export class AnchoredRegion extends FoundationElement {
     private startAutoUpdateEventListeners = (): void => {
         window.addEventListener(eventResize, this.update, { passive: true });
         this.addScrollListener();
-        this.topLayerObserver ??= new TopLayerObserver(this.handleTopLayerChange);
-        this.topLayerObserver.observe();
+        if (topLayerObserverConstructor !== undefined) {
+            this.topLayerObserver ??= new topLayerObserverConstructor(this.handleTopLayerChange);
+            this.topLayerObserver.observe();
+        }
         if (this.resizeDetector !== null && this.viewportElement !== null) {
             this.resizeDetector.observe(this.viewportElement);
         }
