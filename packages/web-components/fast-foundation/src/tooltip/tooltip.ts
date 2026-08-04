@@ -1,4 +1,4 @@
-import { attr, DOM, FASTElement, observable } from "@ni/fast-element";
+import { attr, DOM, FASTElement, nullableNumberConverter, observable } from "@ni/fast-element";
 import { Direction, keyEscape } from "@ni/fast-web-utilities";
 import type {
     AnchoredRegion,
@@ -61,7 +61,7 @@ export class Tooltip extends FoundationElement {
      * @public
      * HTML Attribute: delay
      */
-    @attr
+    @attr({ converter: nullableNumberConverter })
     public delay: number = 300;
 
     /**
