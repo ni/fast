@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix tooltip's delay attribute binding to return number",
-  "packageName": "@ni/fast-foundation",
-  "email": "7282195+m-akinc@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

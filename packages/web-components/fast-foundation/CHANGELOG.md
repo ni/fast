@@ -1,8 +1,16 @@
 # Change Log - @ni/fast-foundation
 
-<!-- This log was last generated on Wed, 08 Jul 2026 18:23:16 GMT and should not be manually modified. -->
+<!-- This log was last generated on Tue, 04 Aug 2026 01:32:08 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 10.2.5
+
+Tue, 04 Aug 2026 01:32:08 GMT
+
+### Patches
+
+- Fix tooltip's delay attribute binding to return number ([ni/fast@0b5a4e7](https://github.com/ni/fast/commit/0b5a4e7d4b56676a15d3acd907c4e092f655b576))
 
 ## 10.2.4
 

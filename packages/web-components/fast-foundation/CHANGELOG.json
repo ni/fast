@@ -2,6 +2,21 @@
   "name": "@ni/fast-foundation",
   "entries": [
     {
+      "date": "Tue, 04 Aug 2026 01:32:08 GMT",
+      "version": "10.2.5",
+      "tag": "@ni/fast-foundation_v10.2.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "7282195+m-akinc@users.noreply.github.com",
+            "package": "@ni/fast-foundation",
+            "commit": "0b5a4e7d4b56676a15d3acd907c4e092f655b576",
+            "comment": "Fix tooltip's delay attribute binding to return number"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 08 Jul 2026 18:23:16 GMT",
       "version": "10.2.4",
       "tag": "@ni/fast-foundation_v10.2.4",
