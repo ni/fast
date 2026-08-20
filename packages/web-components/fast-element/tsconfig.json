@@ -3,7 +3,6 @@
     "compilerOptions": {
         "declarationDir": "dist/dts",
         "outDir": "dist/esm",
-        "importsNotUsedAsValues": "error",
         "ignoreDeprecations": "5.0",
         "experimentalDecorators": true,
         "noImplicitAny": false,
