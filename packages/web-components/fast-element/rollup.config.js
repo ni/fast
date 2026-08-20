@@ -1,5 +1,4 @@
 import commonJS from "@rollup/plugin-commonjs";
-import filesize from "rollup-plugin-filesize";
 import resolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
@@ -26,10 +25,6 @@ export default [
                     declaration: false,
                     declarationDir: undefined,
                 },
-            }),
-            filesize({
-                showMinifiedSize: false,
-                showBrotliSize: true,
             }),
         ],
     },

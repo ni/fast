@@ -28,9 +28,9 @@
     "pack": "npm pack"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.20.0",
-    "@typescript-eslint/parser": "^8.20.0",
-    "eslint": "^8",
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
+    "eslint": "^9",
     "eslint-plugin-import": "^2.25.0"
   }
 }
