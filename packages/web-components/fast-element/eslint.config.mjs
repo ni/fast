@@ -18,8 +18,6 @@ export default defineConfig([
                 typedefs: false,
             }],
 
-            "@typescript-eslint/no-non-null-assertion": "off",
-
             "@typescript-eslint/explicit-function-return-type": ["error", {
                 allowExpressions: true,
             }],

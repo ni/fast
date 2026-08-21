@@ -6,9 +6,5 @@ export default defineConfig([
     globalIgnores(["**/node_modules", "**/dist", "**/coverage", "**/www", "**/__test__"]),
     {
         extends: [fastDnaConfig, prettierConfig],
-
-        rules: {
-            "@typescript-eslint/no-non-null-assertion": "off",
-        },
     },
 ]);
