@@ -44,6 +44,7 @@
     "watch": "npm run build -- -w --preserveWatchOutput"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@types/chai": "^4",
     "@types/chai-spies": "^1.0.3",
     "@types/karma": "^6.3.9",
