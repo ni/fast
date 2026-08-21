@@ -5,6 +5,7 @@
         "outDir": "dist/esm",
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
+        "noImplicitAny": false,
         "useDefineForClassFields": false,
         "ignoreDeprecations": "5.0",
         "target": "es2022",
