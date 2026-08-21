@@ -38,6 +38,5 @@ export class BreadcrumbItem extends Anchor {
  * TODO: https://github.com/microsoft/fast/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
 export interface BreadcrumbItem extends StartEnd, DelegatesARIALink {}
 applyMixins(BreadcrumbItem, StartEnd, DelegatesARIALink);

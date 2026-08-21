@@ -208,6 +208,5 @@ export class TreeItem extends FoundationElement {
  * TODO: https://github.com/microsoft/fast-dna/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
 export interface TreeItem extends StartEnd {}
 applyMixins(TreeItem, StartEnd);

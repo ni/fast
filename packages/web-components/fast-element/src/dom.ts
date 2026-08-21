@@ -66,14 +66,12 @@ const updateQueue = $global.FAST.getById(KernelServiceId.updateQueue, () => {
     });
 });
 
-/* eslint-disable */
 const fastHTMLPolicy: TrustedTypesPolicy = $global.trustedTypes.createPolicy(
     "fast-html",
     {
         createHTML: html => html,
     }
 );
-/* eslint-enable */
 
 let htmlPolicy: TrustedTypesPolicy = fastHTMLPolicy;
 

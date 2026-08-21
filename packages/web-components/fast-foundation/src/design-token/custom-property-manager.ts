@@ -258,7 +258,6 @@ export const PropertyTargetManager = Object.freeze({
         }
 
         if (propertyTargetCache.has(source)) {
-            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
             return propertyTargetCache.get(source)!;
         }
 

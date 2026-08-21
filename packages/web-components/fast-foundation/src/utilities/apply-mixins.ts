@@ -14,7 +14,7 @@ export function applyMixins(derivedCtor: any, ...baseCtors: any[]) {
                 Object.defineProperty(
                     derivedCtor.prototype,
                     name,
-                    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+                     
                     Object.getOwnPropertyDescriptor(baseCtor.prototype, name)!
                 );
             }

@@ -463,6 +463,5 @@ export class Tabs extends FoundationElement {
  * TODO: https://github.com/microsoft/fast/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
 export interface Tabs extends StartEnd {}
 applyMixins(Tabs, StartEnd);

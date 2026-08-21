@@ -246,7 +246,6 @@ export class DelegatesARIASearch {}
  * TODO: https://github.com/microsoft/fast/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
 export interface DelegatesARIASearch extends ARIAGlobalStatesAndProperties {}
 applyMixins(DelegatesARIASearch, ARIAGlobalStatesAndProperties);
 

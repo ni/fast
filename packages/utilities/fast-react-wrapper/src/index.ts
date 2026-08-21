@@ -119,7 +119,6 @@ function getTagName<TElement, TEvents>(
     config: ReactWrapperConfig<TEvents>
 ) {
     if (!config.name) {
-        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
         const definition = FASTElementDefinition.forType(type)!;
 
         if (definition) {
@@ -362,7 +361,6 @@ export function provideReactWrapper(React: any, designSystem?: DesignSystem) {
         if (!wrappersCache.has(type)) {
             wrappersCache.set(type, new Map<string, any>());
         }
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         wrappersCache.get(type)!.set(config.name ?? DEFAULT_CACHE_NAME, reactComponent);
 
         return reactComponent;
