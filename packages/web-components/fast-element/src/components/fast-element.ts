@@ -1,8 +1,6 @@
 import { Controller } from "./controller.js";
-import {
-    FASTElementDefinition,
-    PartialFASTElementDefinition,
-} from "./fast-definitions.js";
+import { FASTElementDefinition } from "./fast-definitions.js";
+import type { PartialFASTElementDefinition } from "./fast-definitions.js";
 
 /**
  * Represents a custom element based on the FASTElement infrastructure.

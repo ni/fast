@@ -1,4 +1,5 @@
-import { Accessor, Observable } from "../observation/observable.js";
+import { Observable } from "../observation/observable.js";
+import type { Accessor } from "../observation/observable.js";
 import { DOM } from "../dom.js";
 import type { Notifier } from "../observation/notifier.js";
 import { createMetadataLocator } from "../platform.js";

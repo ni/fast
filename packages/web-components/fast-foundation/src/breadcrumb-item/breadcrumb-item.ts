@@ -1,7 +1,7 @@
-import { observable, SyntheticViewTemplate } from "@ni/fast-element";
+import { observable, type SyntheticViewTemplate } from "@ni/fast-element";
 import type { FoundationElementDefinition } from "../foundation-element/foundation-element.js";
 import { Anchor, DelegatesARIALink } from "../anchor/anchor.js";
-import { StartEnd, StartEndOptions } from "../patterns/index.js";
+import { StartEnd, type StartEndOptions } from "../patterns/index.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 
 /**

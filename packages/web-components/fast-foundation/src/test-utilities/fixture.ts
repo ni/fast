@@ -1,11 +1,11 @@
 import {
-    Constructable,
+    type Constructable,
     defaultExecutionContext,
     ExecutionContext,
     HTMLView,
     ViewTemplate,
 } from "@ni/fast-element";
-import { DesignSystem, DesignSystemRegistrationContext } from "../design-system/index.js";
+import { DesignSystem, type DesignSystemRegistrationContext } from "../design-system/index.js";
 import type { Container } from "../di/di.js";
 import type {
     FoundationElementDefinition,

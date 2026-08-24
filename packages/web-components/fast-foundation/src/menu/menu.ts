@@ -8,7 +8,7 @@ import {
 } from "@ni/fast-web-utilities";
 import {
     MenuItem,
-    MenuItemColumnCount,
+    type MenuItemColumnCount,
     MenuItemRole,
     roleForMenuItem,
 } from "../menu-item/index.js";

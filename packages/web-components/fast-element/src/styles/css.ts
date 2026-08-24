@@ -1,7 +1,8 @@
 import type { FASTElement } from "../components/fast-element.js";
 import type { Behavior } from "../observation/behavior.js";
 import { CSSDirective } from "./css-directive.js";
-import { ComposableStyles, ElementStyles } from "./element-styles.js";
+import { ElementStyles } from "./element-styles.js";
+import type { ComposableStyles } from "./element-styles.js";
 
 function collectStyles(
     strings: TemplateStringsArray,

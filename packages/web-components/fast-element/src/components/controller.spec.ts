@@ -6,7 +6,8 @@ import { css } from "../styles/css";
 import { html } from "../templating/template";
 import { toHTML, uniqueElementName } from "../__test__/helpers";
 import { Controller } from "./controller";
-import { FASTElementDefinition, PartialFASTElementDefinition } from "./fast-definitions";
+import { FASTElementDefinition } from "./fast-definitions";
+import type { PartialFASTElementDefinition } from "./fast-definitions";
 import { FASTElement } from "./fast-element";
 
 describe("The Controller", () => {

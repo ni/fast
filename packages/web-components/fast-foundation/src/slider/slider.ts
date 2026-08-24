@@ -2,7 +2,7 @@ import {
     attr,
     nullableNumberConverter,
     observable,
-    SyntheticViewTemplate,
+    type SyntheticViewTemplate,
 } from "@ni/fast-element";
 import {
     Direction,

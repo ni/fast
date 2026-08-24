@@ -1,6 +1,7 @@
 import { FAST, KernelServiceId } from "../platform.js";
 import { Observable } from "../observation/observable.js";
-import { ComposableStyles, ElementStyles } from "../styles/element-styles.js";
+import { ElementStyles } from "../styles/element-styles.js";
+import type { ComposableStyles } from "../styles/element-styles.js";
 import type { ElementViewTemplate } from "../templating/template.js";
 import { AttributeConfiguration, AttributeDefinition } from "./attributes.js";
 

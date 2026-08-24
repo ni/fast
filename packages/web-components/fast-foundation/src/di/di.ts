@@ -2,7 +2,7 @@
  * Big thanks to https://github.com/fkleuver and the https://github.com/aurelia/aurelia project
  * for the bulk of this code and many of the associated tests.
  */
-import { Constructable, emptyArray, FASTElement } from "@ni/fast-element";
+import { type Constructable, emptyArray, FASTElement } from "@ni/fast-element";
 import type { Class } from "../interfaces.js";
 
 // Tiny polyfill for TypeScript's Reflect metadata API.

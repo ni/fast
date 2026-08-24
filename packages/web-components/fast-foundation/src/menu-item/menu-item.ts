@@ -1,4 +1,4 @@
-import { attr, DOM, observable, SyntheticViewTemplate } from "@ni/fast-element";
+import { attr, DOM, observable, type SyntheticViewTemplate } from "@ni/fast-element";
 import {
     Direction,
     keyArrowLeft,
@@ -9,10 +9,10 @@ import {
 import type { AnchoredRegion } from "../anchored-region/anchored-region.js";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 import type { Menu } from "../menu/menu.js";
-import { StartEnd, StartEndOptions } from "../patterns/start-end.js";
+import { StartEnd, type StartEndOptions } from "../patterns/start-end.js";
 import { getDirection } from "../utilities/direction.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 import { MenuItemRole, roleForMenuItem } from "./menu-item.options.js";

@@ -1,13 +1,13 @@
 import {
-    Behavior,
-    Binding,
-    BindingObserver,
+    type Behavior,
+    type Binding,
+    type BindingObserver,
     CSSDirective,
     defaultExecutionContext,
     FASTElement,
     observable,
     Observable,
-    Subscriber,
+    type Subscriber,
 } from "@ni/fast-element";
 import { composedParent } from "../utilities/composed-parent.js";
 import { composedContains } from "../utilities/composed-contains.js";

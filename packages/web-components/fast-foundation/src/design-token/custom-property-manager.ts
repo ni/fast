@@ -1,5 +1,5 @@
 import {
-    Constructable,
+    type Constructable,
     Controller,
     DOM,
     ElementStyles,

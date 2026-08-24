@@ -1,5 +1,6 @@
 import { expect } from "chai";
-import { repeat, RepeatDirective, RepeatOptions, RepeatBehavior } from "./repeat";
+import { repeat, RepeatDirective, RepeatBehavior } from "./repeat";
+import type { RepeatOptions } from "./repeat";
 import { html } from "./template";
 import { defaultExecutionContext, observable } from "../observation/observable";
 import { DOM } from "../dom";

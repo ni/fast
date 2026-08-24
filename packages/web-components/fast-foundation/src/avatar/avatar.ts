@@ -1,7 +1,7 @@
-import { attr, SyntheticViewTemplate } from "@ni/fast-element";
+import { attr, type SyntheticViewTemplate } from "@ni/fast-element";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 
 type AvatarShape = "circle" | "square";

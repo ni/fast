@@ -22,7 +22,7 @@ import {
 } from "@ni/fast-web-utilities";
 import {
     AnchoredRegion,
-    AnchoredRegionConfig,
+    type AnchoredRegionConfig,
     FlyoutPosBottom,
     FlyoutPosBottomFill,
     FlyoutPosTallest,

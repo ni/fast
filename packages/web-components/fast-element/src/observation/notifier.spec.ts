@@ -1,7 +1,8 @@
 import { expect } from "chai";
 import { DOM } from "../dom";
 import { enableArrayObservation } from "./array-observer";
-import { PropertyChangeNotifier, Subscriber, SubscriberSet } from "./notifier";
+import { PropertyChangeNotifier, SubscriberSet } from "./notifier";
+import type { Subscriber } from "./notifier";
 import { Observable } from "./observable";
 
 describe(`A SubscriberSet`, () => {

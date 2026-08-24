@@ -9,11 +9,11 @@ import {
     limit,
     uniqueId,
 } from "@ni/fast-web-utilities";
-import { StartEnd, StartEndOptions } from "../patterns/start-end.js";
+import { StartEnd, type StartEndOptions } from "../patterns/start-end.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 
 /**
