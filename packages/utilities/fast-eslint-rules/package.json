@@ -3,7 +3,7 @@
   "description": "eslint rules for FAST projects",
   "sideEffects": false,
   "version": "1.0.0",
-  "private": "true",
+  "private": true,
   "author": {
     "name": "National Instruments"
   },
