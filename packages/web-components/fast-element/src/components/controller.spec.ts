@@ -25,7 +25,7 @@ describe("The Controller", () => {
         const name = uniqueElementName();
         const definition = new FASTElementDefinition(
             class ControllerTest extends BaseClass {
-                static definition = { ...config, name };
+                static definition: any = { ...config, name };
             }
         ).define();
 

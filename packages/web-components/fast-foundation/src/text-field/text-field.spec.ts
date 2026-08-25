@@ -626,6 +626,7 @@ describe("TextField", () => {
 
     describe("with constraint validation", () => {
         Object.keys(TextFieldType)
+            // @ts-expect-error
             .map(key => TextFieldType[key])
             .forEach(type => {
                 describe(`of [type="${type}"]`, () => {

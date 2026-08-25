@@ -24,6 +24,9 @@ export default defineConfig([globalIgnores([
         "@typescript-eslint/no-empty-object-type": "off",
         "@typescript-eslint/no-unsafe-function-type": "off",
         "@typescript-eslint/no-wrapper-object-types": "error",
+        "@typescript-eslint/ban-ts-comment": ["error", {
+            "ts-expect-error": false,
+        }],
 
         "import/extensions": ["error", "always", {
             template: "never",

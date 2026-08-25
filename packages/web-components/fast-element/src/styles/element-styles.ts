@@ -149,6 +149,7 @@ function separateSheetsToPrepend(
     const prepend: CSSStyleSheet[] = [];
     const append: CSSStyleSheet[] = [];
     sheets.forEach(x =>
+        // @ts-expect-error
         (x[prependToAdoptedStyleSheetsSymbol] ? prepend : append).push(x)
     );
     return { prepend, append };

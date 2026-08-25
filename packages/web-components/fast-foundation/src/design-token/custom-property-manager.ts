@@ -39,6 +39,7 @@ class ConstructableStyleSheetTarget extends QueuedStyleSheetTarget {
         super();
 
         const sheet = new CSSStyleSheet();
+    // @ts-expect-error
         sheet[prependToAdoptedStyleSheetsSymbol] = true;
         this.target = (sheet.cssRules[sheet.insertRule(":host{}")] as CSSStyleRule).style;
         source.$fastController.addStyles(ElementStyles.create([sheet]));

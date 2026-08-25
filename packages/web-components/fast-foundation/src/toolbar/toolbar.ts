@@ -182,7 +182,9 @@ export class Toolbar extends FoundationElement {
      */
     private getDirectionalIncrementer(key: string): number {
         return (
+            // @ts-expect-error
             ToolbarArrowKeyMap[key]?.[this.orientation]?.[this.direction] ??
+            // @ts-expect-error
             ToolbarArrowKeyMap[key]?.[this.orientation] ??
             0
         );

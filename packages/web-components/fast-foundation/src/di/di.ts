@@ -769,9 +769,11 @@ export const DI = Object.freeze({
                         const handleChange = () => {
                             const newContainer = DI.findResponsibleContainer(this);
                             const newValue = newContainer.get(key) as any;
+                            // @ts-expect-error
                             const oldValue = this[diPropertyKey];
 
                             if (newValue !== oldValue) {
+                                // @ts-expect-error
                                 this[diPropertyKey] = value;
                                 notifier.notify(propertyName);
                             }

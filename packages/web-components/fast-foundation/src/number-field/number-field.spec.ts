@@ -13,6 +13,7 @@ async function setup(props?: Partial<NumberField>) {
 
     if(props) {
         for(let key in props) {
+            // @ts-expect-error
             element[key] = props[key].toString();
         }
     }

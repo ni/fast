@@ -62,7 +62,7 @@ export class DateFormatter {
      */
     public date: Date = new Date();
 
-    constructor(config?: {}) {
+    constructor(config?: any) {
         /**
          * Add properties on construction
          */
@@ -72,6 +72,7 @@ export class DateFormatter {
                 if (key === "date") {
                     this.date = this.getDateObject(value);
                 } else {
+                    // @ts-expect-error
                     this[key] = value;
                 }
             }

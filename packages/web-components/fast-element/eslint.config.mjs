@@ -13,6 +13,9 @@ export default defineConfig([
             "@typescript-eslint/no-empty-object-type": "off",
             "@typescript-eslint/no-unsafe-function-type": "off",
             "@typescript-eslint/no-wrapper-object-types": "error",
+            "@typescript-eslint/ban-ts-comment": ["error", {
+                "ts-expect-error": false,
+            }],
 
             "@typescript-eslint/no-use-before-define": ["error", {
                 typedefs: false,

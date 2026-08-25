@@ -6,7 +6,6 @@
         "verbatimModuleSyntax": true,
         "ignoreDeprecations": "5.0",
         "experimentalDecorators": true,
-        "noImplicitAny": false,
         "strictPropertyInitialization": false,
         "useDefineForClassFields": false,
         "target": "es2022",

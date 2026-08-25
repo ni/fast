@@ -140,8 +140,8 @@ export class FASTElementDefinition<TType extends Function = Function> {
 
         const attributes = AttributeDefinition.collect(type, nameOrConfig.attributes);
         const observedAttributes = new Array<string>(attributes.length);
-        const propertyLookup = {};
-        const attributeLookup = {};
+        const propertyLookup: Record<string, AttributeDefinition> = {};
+        const attributeLookup: Record<string, AttributeDefinition> = {};
 
         for (let i = 0, ii = attributes.length; i < ii; ++i) {
             const current = attributes[i];

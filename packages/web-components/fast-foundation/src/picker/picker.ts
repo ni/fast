@@ -1020,6 +1020,7 @@ export class Picker extends FormAssociatedPicker {
      * Updates the menu configuration
      */
     private updateMenuConfig(): void {
+        // @ts-expect-error
         let newConfig = this.configLookup[this.menuPlacement];
 
         if (newConfig === null) {

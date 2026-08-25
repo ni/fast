@@ -392,11 +392,15 @@ export class Slider extends FormAssociatedSlider implements SliderConfiguration 
 
     private setupListeners = (remove: boolean = false): void => {
         const eventAction = `${remove ? "remove" : "add"}EventListener`;
+        // @ts-expect-error
         this[eventAction]("keydown", this.keypressHandler);
+        // @ts-expect-error
         this[eventAction]("mousedown", this.handleMouseDown);
+        // @ts-expect-error
         this.thumb[eventAction]("mousedown", this.handleThumbMouseDown, {
             passive: true,
         });
+        // @ts-expect-error
         this.thumb[eventAction]("touchstart", this.handleThumbMouseDown, {
             passive: true,
         });
@@ -442,9 +446,13 @@ export class Slider extends FormAssociatedSlider implements SliderConfiguration 
             (event.target as HTMLElement).focus();
         }
         const eventAction = `${event !== null ? "add" : "remove"}EventListener`;
+        // @ts-expect-error
         window[eventAction]("mouseup", this.handleWindowMouseUp);
+        // @ts-expect-error
         window[eventAction]("mousemove", this.handleMouseMove, { passive: true });
+        // @ts-expect-error
         window[eventAction]("touchmove", this.handleMouseMove, { passive: true });
+        // @ts-expect-error
         window[eventAction]("touchend", this.handleWindowMouseUp);
         this.isDragging = event !== null;
     };
@@ -506,8 +514,11 @@ export class Slider extends FormAssociatedSlider implements SliderConfiguration 
     private handleMouseDown = (e: MouseEvent | null) => {
         const eventAction = `${e !== null ? "add" : "remove"}EventListener`;
         if (e === null || (!this.disabled && !this.readOnly)) {
+            // @ts-expect-error
             window[eventAction]("mouseup", this.handleWindowMouseUp);
+            // @ts-expect-error
             window.document[eventAction]("mouseleave", this.handleWindowMouseUp);
+            // @ts-expect-error
             window[eventAction]("mousemove", this.handleMouseMove);
 
             if (e) {
