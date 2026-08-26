@@ -1,6 +1,6 @@
 {
-  "type": "patch",
-  "comment": "Update typescript and eslint dependencies, and migrate eslint config",
+  "type": "minor",
+  "comment": "TypeScript 5.9.3 and dep update",
   "packageName": "@ni/fast-web-utilities",
   "email": "7282195+m-akinc@users.noreply.github.com",
   "dependentChangeType": "patch"

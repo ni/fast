@@ -29,12 +29,10 @@
     "pack": "npm pack"
   },
   "peerDependencies": {
+    "@eslint/compat": "^2.1.0",
+    "@eslint/js": "^9.39.5",
     "eslint": "^9",
     "eslint-plugin-import": "^2.25.0",
     "typescript-eslint": "^8.65.0"
-  },
-  "devDependencies": {
-    "@eslint/compat": "^2.1.0",
-    "@eslint/js": "^9.39.5"
   }
 }

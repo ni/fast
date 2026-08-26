@@ -56,7 +56,7 @@
     "@custom-elements-manifest/analyzer": "^0.11.0",
     "@microsoft/api-extractor": "7.59.0",
     "@rollup/plugin-commonjs": "^29",
-    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-node-resolve": "^16",
     "@rollup/plugin-terser": "^1",
     "@rollup/plugin-typescript": "^12",
     "@types/chai": "^4",
