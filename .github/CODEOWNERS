@@ -13,5 +13,4 @@
 # Change files don't need explicit reviewers
 /change
 
-/.snyk @ni/security-scanning-owners
 /.wiz @ni/security-scanning-owners
