@@ -4,7 +4,6 @@
         "declarationDir": "dist/dts",
         "outDir": "dist/esm",
         "verbatimModuleSyntax": true,
-        "ignoreDeprecations": "5.0",
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
         "useDefineForClassFields": false,

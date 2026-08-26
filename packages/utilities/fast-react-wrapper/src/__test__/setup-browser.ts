@@ -3,4 +3,4 @@ function importAll(r: __WebpackModuleApi.RequireContext): void {
 }
 
 // Explicitly add to browser test
-importAll(require.context("../", true, /\.spec\.js$/));
+importAll(import.meta.webpackContext("../", { recursive: true, regExp: /\.spec\.js$/ }));

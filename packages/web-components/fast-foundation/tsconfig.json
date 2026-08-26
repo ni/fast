@@ -3,11 +3,10 @@
     "compilerOptions": {
         "declarationDir": "dist/dts",
         "outDir": "dist/esm",
-        "verbatimModuleSyntax": true,
         "experimentalDecorators": true,
         "strictPropertyInitialization": false,
         "useDefineForClassFields": false,
-        "ignoreDeprecations": "5.0",
+        "verbatimModuleSyntax": true,
         "target": "es2022",
         "module": "es2020",
         "importHelpers": true,

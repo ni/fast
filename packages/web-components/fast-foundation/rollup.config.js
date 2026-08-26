@@ -25,6 +25,7 @@ export default [
                 compilerOptions: {
                     declaration: false,
                     declarationDir: undefined,
+                    outDir: "dist",
                 },
             }),
         ],

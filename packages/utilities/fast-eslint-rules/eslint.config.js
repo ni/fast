@@ -1,43 +1,14 @@
-const {
-    defineConfig,
-} = require("eslint/config");
+import { defineConfig } from "eslint/config";
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+import _import from "eslint-plugin-import";
+import { fixupPluginRules } from "@eslint/compat";
+import globals from "globals";
 
-const tsParser = require("@typescript-eslint/parser");
-const typescriptEslint = require("@typescript-eslint/eslint-plugin");
-const _import = require("eslint-plugin-import");
-
-const {
-    fixupPluginRules,
-} = require("@eslint/compat");
-
-const globals = require("globals");
-const js = require("@eslint/js");
-
-const {
-    FlatCompat,
-} = require("@eslint/eslintrc");
-
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-    recommendedConfig: js.configs.recommended,
-    allConfig: js.configs.all
-});
-
-module.exports = defineConfig([{
-    languageOptions: {
-        parser: tsParser,
-    },
-
+export default defineConfig([js.configs.recommended, ...tseslint.configs.recommended, {
     plugins: {
-        "@typescript-eslint": typescriptEslint,
         import: fixupPluginRules(_import),
     },
-
-    extends: compat.extends(
-        "eslint:recommended",
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-    ),
 
     rules: {
         "no-unused-vars": "off",
@@ -109,7 +80,6 @@ module.exports = defineConfig([{
     },
 }, {
     files: ["**/*.js"],
-    extends: compat.extends("eslint:recommended"),
 
     languageOptions: {
         globals: {
