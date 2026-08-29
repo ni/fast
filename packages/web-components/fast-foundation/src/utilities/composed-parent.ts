@@ -4,22 +4,43 @@
  * element of the shadow root. Otherwise it will return the parent node or null if
  * no parent node exists.
  * @param element - The element for which to retrieve the composed parent
+ * @param asSlotted - When true, returns the element's assignedSlot (if any) as the composed parent.
  *
  * @public
  */
-export function composedParent<T extends HTMLElement>(element: T): HTMLElement | null {
-    const parentNode = element.parentElement;
+export function composedParent<T extends HTMLElement>(element: T, asSlotted = false): HTMLElement | null {
+    if (asSlotted && element.assignedSlot) {
+        return element.assignedSlot;
+    }
 
-    if (parentNode) {
-        return parentNode;
-    } else {
-        const rootNode = element.getRootNode();
+    return element.parentElement ?? shadowDomHost(element);
+}
 
-        if ((rootNode as ShadowRoot).host instanceof HTMLElement) {
-            // this is shadow-root
-            return (rootNode as ShadowRoot).host as HTMLElement;
-        }
+function shadowDomHost(element: HTMLElement): HTMLElement | null {
+    const rootNode = element.getRootNode();
+
+    if ((rootNode as ShadowRoot).host instanceof HTMLElement) {
+        // this is shadow-root
+        return (rootNode as ShadowRoot).host as HTMLElement;
     }
 
     return null;
+}
+
+/** @internal */
+export function topLayerRootAncestor(element: HTMLElement): HTMLElement | null {
+    let parentElement: HTMLElement | null = composedParent(element, true);
+    while (parentElement) {
+        if (isTopLayerRoot(parentElement)) {
+            return parentElement;
+        }
+        parentElement = composedParent(parentElement, true);
+    }
+    return null;
+}
+
+function isTopLayerRoot(element: HTMLElement): boolean {
+    return element.matches(':popover-open')
+        || element.matches(':modal')
+        || document.fullscreenElement === element;
 }

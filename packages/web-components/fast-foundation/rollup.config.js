@@ -12,10 +12,12 @@ export default [
             {
                 file: "dist/fast-foundation.js",
                 format: "esm",
+                inlineDynamicImports: true,
             },
             {
                 file: "dist/fast-foundation.min.js",
                 format: "esm",
+                inlineDynamicImports: true,
                 plugins: [terser()],
             },
         ],
