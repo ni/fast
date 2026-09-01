@@ -25,7 +25,7 @@ describe("The slotted", () => {
 
     context("behavior", () => {
         class Model {
-            @observable nodes;
+            @observable nodes: any;
         }
 
         function createAndAppendChildren(host: HTMLElement, elementName = "div") {

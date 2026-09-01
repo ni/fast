@@ -182,7 +182,6 @@ export class DataGridRow extends FoundationElement {
                 x => x.activeCellItemTemplate,
                 { positioning: true }
             ).createBehavior(this.cellsPlaceholder);
-            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
             this.$fastController.addBehaviors([this.cellsRepeatBehavior!]);
         }
 

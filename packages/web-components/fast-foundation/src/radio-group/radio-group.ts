@@ -141,6 +141,7 @@ export class RadioGroup extends FoundationElement {
     }
 
     private get isInsideFoundationToolbar(): boolean {
+        // @ts-expect-error
         return !!this.parentToolbar?.["$fastController"];
     }
 

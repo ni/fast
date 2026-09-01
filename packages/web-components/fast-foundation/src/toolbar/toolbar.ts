@@ -3,10 +3,10 @@ import { ArrowKeys, Direction, limit, Orientation } from "@ni/fast-web-utilities
 import { isFocusable } from "tabbable";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 import { ARIAGlobalStatesAndProperties } from "../patterns/aria-global.js";
-import { StartEnd, StartEndOptions } from "../patterns/start-end.js";
+import { StartEnd, type StartEndOptions } from "../patterns/start-end.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 import { getDirection } from "../utilities/direction.js";
 import { getRootActiveElement } from "../utilities/root-active-element.js";
@@ -182,7 +182,9 @@ export class Toolbar extends FoundationElement {
      */
     private getDirectionalIncrementer(key: string): number {
         return (
+            // @ts-expect-error
             ToolbarArrowKeyMap[key]?.[this.orientation]?.[this.direction] ??
+            // @ts-expect-error
             ToolbarArrowKeyMap[key]?.[this.orientation] ??
             0
         );

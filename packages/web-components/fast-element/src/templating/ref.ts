@@ -27,7 +27,6 @@ export class RefBehavior implements Behavior {
      * Unbinds this behavior from the source.
      * @param source - The source to unbind from.
      */
-    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     public unbind(): void {}
 }
 

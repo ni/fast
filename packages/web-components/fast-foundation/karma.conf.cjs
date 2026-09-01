@@ -94,6 +94,9 @@ module.exports = function (config) {
                     {
                         test: /\.js$/,
                         enforce: "pre",
+                        resolve: {
+                            fullySpecified: false,
+                        },
                         use: [
                             {
                                 loader: "source-map-loader",

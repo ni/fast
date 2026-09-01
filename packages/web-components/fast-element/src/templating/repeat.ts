@@ -1,17 +1,14 @@
 import { DOM } from "../dom.js";
-import {
-    Binding,
-    BindingObserver,
-    ExecutionContext,
-    Observable,
-} from "../observation/observable.js";
+import { ExecutionContext, Observable } from "../observation/observable.js";
+import type { Binding, BindingObserver } from "../observation/observable.js";
 import type { Notifier, Subscriber } from "../observation/notifier.js";
 import { enableArrayObservation } from "../observation/array-observer.js";
 import type { Splice } from "../observation/array-change-records.js";
 import type { Behavior } from "../observation/behavior.js";
 import { emptyArray } from "../platform.js";
 import { HTMLDirective } from "./html-directive.js";
-import { HTMLView, SyntheticView } from "./view.js";
+import { HTMLView } from "./view.js";
+import type { SyntheticView } from "./view.js";
 import type { CaptureType, SyntheticViewTemplate } from "./template.js";
 
 /**

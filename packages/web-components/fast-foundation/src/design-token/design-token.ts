@@ -1,13 +1,13 @@
 import {
-    Behavior,
-    Binding,
-    BindingObserver,
+    type Behavior,
+    type Binding,
+    type BindingObserver,
     CSSDirective,
     defaultExecutionContext,
     FASTElement,
     observable,
     Observable,
-    Subscriber,
+    type Subscriber,
 } from "@ni/fast-element";
 import { composedParent } from "../utilities/composed-parent.js";
 import { composedContains } from "../utilities/composed-contains.js";
@@ -22,7 +22,7 @@ import type {
     StaticDesignTokenValue,
 } from "./interfaces.js";
 import { defaultElement } from "./custom-property-manager.js";
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 /**
  * Describes a DesignToken instance.
  * @public
@@ -1002,4 +1002,3 @@ export const DesignToken = Object.freeze({
         RootStyleSheetTarget.unregisterRoot(target);
     },
 });
-/* eslint-enable @typescript-eslint/no-non-null-assertion */

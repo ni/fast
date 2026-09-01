@@ -6,9 +6,9 @@ import {
     ComponentPresentation,
     DefaultComponentPresentation,
     DesignSystem,
-    ElementDefinitionContext,
+    type ElementDefinitionContext,
 } from "../design-system";
-import { FoundationElement, FoundationElementDefinition, OverrideFoundationElementDefinition } from "./foundation-element";
+import { FoundationElement, type FoundationElementDefinition, type OverrideFoundationElementDefinition } from "./foundation-element";
 
 const styles = css`
     :host {

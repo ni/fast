@@ -90,11 +90,9 @@ export const $global: Global = (function () {
     try {
         // Hopefully we never get here...
         // Not all environments allow eval and Function. Use only as a last resort:
-        // eslint-disable-next-line no-new-func
         return new Function("return this")();
     } catch {
         // If all fails, give up and create an object.
-        // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
         return {};
     }
 })();

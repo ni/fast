@@ -1,11 +1,7 @@
 import { DOM } from "../dom.js";
 import type { Behavior } from "../observation/behavior.js";
-import {
-    Binding,
-    BindingObserver,
-    ExecutionContext,
-    Observable,
-} from "../observation/observable.js";
+import { ExecutionContext, Observable } from "../observation/observable.js";
+import type { Binding, BindingObserver } from "../observation/observable.js";
 import { TargetedHTMLDirective } from "./html-directive.js";
 import type { SyntheticView } from "./view.js";
 

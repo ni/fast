@@ -32,7 +32,6 @@ export function loadImageData(source: string): Promise<ImageData> {
                 reject("Unable to create image");
                 return;
             }
-            /* eslint-disable-next-line */
             image.onload = (e: Event): void => {
                 const canvas: HTMLCanvasElement = document.createElement("canvas");
                 if (!canvas) {

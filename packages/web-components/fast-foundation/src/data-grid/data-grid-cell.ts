@@ -20,6 +20,7 @@ const defaultCellContentsTemplate: ViewTemplate<DataGridCell> = html`
             x.columnDefinition === null ||
             x.columnDefinition.columnDataKey === null
                 ? null
+                // @ts-expect-error
                 : x.rowData[x.columnDefinition.columnDataKey]}
     </template>
 `;

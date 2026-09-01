@@ -4,7 +4,8 @@ import { observable, defaultExecutionContext } from "../observation/observable";
 import { DOM } from "../dom";
 import { html, ViewTemplate } from "./template";
 import { toHTML } from "../__test__/helpers";
-import { SyntheticView, HTMLView } from "./view";
+import { HTMLView } from "./view";
+import type { SyntheticView } from "./view";
 
 describe("The HTML binding directive", () => {
     class Model {

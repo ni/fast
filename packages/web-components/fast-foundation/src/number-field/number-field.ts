@@ -3,10 +3,10 @@ import {
     DOM,
     nullableNumberConverter,
     observable,
-    SyntheticViewTemplate,
+    type SyntheticViewTemplate,
 } from "@ni/fast-element";
 import { keyArrowDown, keyArrowUp } from "@ni/fast-web-utilities";
-import { StartEnd, StartEndOptions } from "../patterns/start-end.js";
+import { StartEnd, type StartEndOptions } from "../patterns/start-end.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 import type { FoundationElementDefinition } from "../foundation-element/foundation-element.js";
 import { DelegatesARIATextbox } from "../text-field/text-field.js";

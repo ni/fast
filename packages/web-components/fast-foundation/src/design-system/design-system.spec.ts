@@ -1,4 +1,4 @@
-import { Constructable, DOM } from "@ni/fast-element";
+import { type Constructable, DOM } from "@ni/fast-element";
 import { expect } from "chai";
 import { FoundationElement } from "..";
 import { Container, DI, Registration } from "../di";

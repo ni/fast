@@ -1,4 +1,5 @@
-import { Accessor, Observable } from "../observation/observable.js";
+import { Observable } from "../observation/observable.js";
+import type { Accessor } from "../observation/observable.js";
 import { DOM } from "../dom.js";
 import type { Notifier } from "../observation/notifier.js";
 import { createMetadataLocator } from "../platform.js";
@@ -188,6 +189,7 @@ export class AttributeDefinition implements Accessor {
      * @param value - The value to set the attribute/property to.
      */
     public setValue(source: HTMLElement, newValue: any): void {
+        // @ts-expect-error
         const oldValue = source[this.fieldName];
         const converter = this.converter;
 
@@ -196,11 +198,13 @@ export class AttributeDefinition implements Accessor {
         }
 
         if (oldValue !== newValue) {
+            // @ts-expect-error
             source[this.fieldName] = newValue;
 
             this.tryReflectToAttribute(source);
 
             if (this.hasCallback) {
+                // @ts-expect-error
                 source[this.callbackName](oldValue, newValue);
             }
 
@@ -214,6 +218,7 @@ export class AttributeDefinition implements Accessor {
      */
     public getValue(source: HTMLElement): any {
         Observable.track(source, this.name);
+        // @ts-expect-error
         return source[this.fieldName];
     }
 
@@ -239,6 +244,7 @@ export class AttributeDefinition implements Accessor {
         DOM.queueUpdate(() => {
             guards.add(element);
 
+            // @ts-expect-error
             const latestValue = element[this.fieldName];
 
             switch (mode) {
