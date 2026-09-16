@@ -1,8 +1,6 @@
 import { Controller } from "./controller.js";
-import {
-    FASTElementDefinition,
-    PartialFASTElementDefinition,
-} from "./fast-definitions.js";
+import { FASTElementDefinition } from "./fast-definitions.js";
+import type { PartialFASTElementDefinition } from "./fast-definitions.js";
 
 /**
  * Represents a custom element based on the FASTElement infrastructure.
@@ -57,7 +55,6 @@ export interface FASTElement {
     attributeChangedCallback(name: string, oldValue: string, newValue: string): void;
 }
 
-/* eslint-disable-next-line @typescript-eslint/explicit-function-return-type */
 function createFASTElement<T extends typeof HTMLElement>(
     BaseType: T
 ): { new (): InstanceType<T> & FASTElement } {
@@ -65,7 +62,6 @@ function createFASTElement<T extends typeof HTMLElement>(
         public readonly $fastController!: Controller;
 
         public constructor() {
-            /* eslint-disable-next-line */
             super();
             Controller.forCustomElement(this as any);
         }
@@ -132,7 +128,6 @@ export const FASTElement = Object.assign(createFASTElement(HTMLElement), {
  * @public
  */
 export function customElement(nameOrDef: string | PartialFASTElementDefinition) {
-    /* eslint-disable-next-line @typescript-eslint/explicit-function-return-type */
     return function (type: Function) {
         new FASTElementDefinition(type, nameOrDef).define();
     };

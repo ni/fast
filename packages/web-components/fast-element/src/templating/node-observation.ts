@@ -1,5 +1,6 @@
 import type { Behavior } from "../observation/behavior.js";
-import { Accessor, Observable } from "../observation/observable.js";
+import { Observable } from "../observation/observable.js";
+import type { Accessor } from "../observation/observable.js";
 import { emptyArray } from "../platform.js";
 
 /**

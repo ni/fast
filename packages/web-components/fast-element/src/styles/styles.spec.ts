@@ -2,9 +2,9 @@ import { expect } from "chai";
 import {
     AdoptedStyleSheetsStyles,
     StyleElementStyles,
-    StyleTarget,
     ElementStyles,
 } from "./element-styles";
+import type { StyleTarget } from "./element-styles";
 import { DOM } from "../dom";
 import { CSSDirective } from "./css-directive";
 import { css, cssPartial } from "./css";

@@ -49,6 +49,7 @@ async function setup(props?: {}) {
     element.locale = "en-US";
 
     for(const key in props) {
+        // @ts-expect-error
         element.setAttribute(key, props[key]);
     }
 

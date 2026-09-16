@@ -1,5 +1,5 @@
 import {
-    Behavior,
+    type Behavior,
     ElementStyles,
     FASTElement,
     Observable,
@@ -51,6 +51,7 @@ export class PropertyStyleSheetBehavior implements Behavior {
      * @internal
      */
     public handleChange(source: FASTElement, key: string) {
+        // @ts-expect-error
         if (source[key] === this.value) {
             source.$fastController.addStyles(this.styles);
         } else {

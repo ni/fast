@@ -1,7 +1,8 @@
 import { expect } from "chai";
 import { when } from "./when";
 import { html } from "./template";
-import { Binding, defaultExecutionContext } from "../observation/observable";
+import { defaultExecutionContext } from "../observation/observable";
+import type { Binding } from "../observation/observable";
 
 describe("The 'when' template function", () => {
     it("returns an expression", () => {

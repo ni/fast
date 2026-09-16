@@ -1,4 +1,4 @@
-import { attr, DOM, Notifier, Observable } from "@ni/fast-element";
+import { attr, DOM, type Notifier, Observable } from "@ni/fast-element";
 import { keyEscape, keyTab } from "@ni/fast-web-utilities";
 import { isTabbable } from "tabbable";
 import { FoundationElement } from "../foundation-element/foundation-element.js";

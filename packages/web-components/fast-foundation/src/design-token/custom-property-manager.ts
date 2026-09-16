@@ -1,5 +1,5 @@
 import {
-    Constructable,
+    type Constructable,
     Controller,
     DOM,
     ElementStyles,
@@ -39,6 +39,7 @@ class ConstructableStyleSheetTarget extends QueuedStyleSheetTarget {
         super();
 
         const sheet = new CSSStyleSheet();
+    // @ts-expect-error
         sheet[prependToAdoptedStyleSheetsSymbol] = true;
         this.target = (sheet.cssRules[sheet.insertRule(":host{}")] as CSSStyleRule).style;
         source.$fastController.addStyles(ElementStyles.create([sheet]));
@@ -258,7 +259,6 @@ export const PropertyTargetManager = Object.freeze({
         }
 
         if (propertyTargetCache.has(source)) {
-            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
             return propertyTargetCache.get(source)!;
         }
 

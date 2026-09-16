@@ -15,11 +15,11 @@ export * from "./data-grid/index.js";
 export * from "./design-system/index.js";
 export {
     DesignToken,
-    CSSDesignToken,
-    DesignTokenChangeRecord,
-    DesignTokenSubscriber,
+    type CSSDesignToken,
+    type DesignTokenChangeRecord,
+    type DesignTokenSubscriber,
 } from "./design-token/design-token.js";
-export {
+export type {
     StaticDesignTokenValue,
     DerivedDesignTokenValue,
     DesignTokenValue,

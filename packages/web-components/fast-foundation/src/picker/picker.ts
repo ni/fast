@@ -22,7 +22,7 @@ import {
 } from "@ni/fast-web-utilities";
 import {
     AnchoredRegion,
-    AnchoredRegionConfig,
+    type AnchoredRegionConfig,
     FlyoutPosBottom,
     FlyoutPosBottomFill,
     FlyoutPosTallest,
@@ -547,7 +547,6 @@ export class Picker extends FormAssociatedPicker {
 
         this.inputElement.addEventListener("input", this.handleTextInput);
         this.inputElement.addEventListener("click", this.handleInputClick);
-        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
         this.$fastController.addBehaviors([this.itemsRepeatBehavior!]);
 
         this.menuElement.suggestionsAvailableText = this.suggestionsAvailableText;
@@ -562,7 +561,6 @@ export class Picker extends FormAssociatedPicker {
             { positioning: true }
         ).createBehavior(this.optionsPlaceholder);
 
-        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
         this.$fastController.addBehaviors([this.optionsRepeatBehavior!]);
 
         this.handleSelectionChange();
@@ -1022,6 +1020,7 @@ export class Picker extends FormAssociatedPicker {
      * Updates the menu configuration
      */
     private updateMenuConfig(): void {
+        // @ts-expect-error
         let newConfig = this.configLookup[this.menuPlacement];
 
         if (newConfig === null) {

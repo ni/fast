@@ -643,7 +643,6 @@ export class DelegatesARIAListbox {
  * TODO: https://github.com/microsoft/fast/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
 export interface DelegatesARIAListbox extends ARIAGlobalStatesAndProperties {}
 applyMixins(DelegatesARIAListbox, ARIAGlobalStatesAndProperties);
 

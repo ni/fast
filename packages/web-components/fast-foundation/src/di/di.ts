@@ -2,7 +2,7 @@
  * Big thanks to https://github.com/fkleuver and the https://github.com/aurelia/aurelia project
  * for the bulk of this code and many of the associated tests.
  */
-import { Constructable, emptyArray, FASTElement } from "@ni/fast-element";
+import { type Constructable, emptyArray, FASTElement } from "@ni/fast-element";
 import type { Class } from "../interfaces.js";
 
 // Tiny polyfill for TypeScript's Reflect metadata API.
@@ -343,7 +343,6 @@ export class ResolverBuilder<K> {
 
     private registerResolver(strategy: ResolverStrategy, state: unknown): Resolver<K> {
         const { container, key } = this;
-        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
         this.container = this.key = (void 0)!;
         return container.registerResolver(key, new ResolverImpl(key, strategy, state));
     }
@@ -770,9 +769,11 @@ export const DI = Object.freeze({
                         const handleChange = () => {
                             const newContainer = DI.findResponsibleContainer(this);
                             const newValue = newContainer.get(key) as any;
+                            // @ts-expect-error
                             const oldValue = this[diPropertyKey];
 
                             if (newValue !== oldValue) {
+                                // @ts-expect-error
                                 this[diPropertyKey] = value;
                                 notifier.notify(propertyName);
                             }
@@ -1154,7 +1155,6 @@ function createAllResolver(
 
         resolver.$isResolver = true;
         resolver.resolve = function (handler: Container, requestor: Container): any {
-            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
             return getter(key, handler, requestor, searchAncestors!);
         };
 
@@ -1299,7 +1299,6 @@ export const newInstanceOf = createResolver(
 );
 
 function createNewInstance(key: any, handler: Container) {
-    /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
     return handler.getFactory(key)!.construct(handler);
 }
 
@@ -1741,7 +1740,6 @@ export class ContainerImpl implements Container {
 
                 if (resolver != null) {
                     resolutions = resolutions.concat(
-                        /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
                         buildAllResponse(resolver, current, requestor!)
                     );
                 }

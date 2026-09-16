@@ -1,4 +1,4 @@
-import { attr, observable, SyntheticViewTemplate } from "@ni/fast-element";
+import { attr, observable, type SyntheticViewTemplate } from "@ni/fast-element";
 import { keySpace } from "@ni/fast-web-utilities";
 import type { FoundationElementDefinition } from "../foundation-element/foundation-element.js";
 import { FormAssociatedRadio } from "./radio.form-associated.js";

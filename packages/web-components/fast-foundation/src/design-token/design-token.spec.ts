@@ -3,7 +3,7 @@ import chia, { expect } from "chai";
 import { DesignSystem } from "../design-system";
 import { uniqueElementName } from "../test-utilities/fixture";
 import { FoundationElement } from "../foundation-element";
-import { CSSDesignToken, DesignToken, DesignTokenChangeRecord, DesignTokenSubscriber } from "./design-token";
+import { type CSSDesignToken, DesignToken, type DesignTokenChangeRecord, type DesignTokenSubscriber } from "./design-token";
 import spies from "chai-spies";
 
 chia.use(spies);

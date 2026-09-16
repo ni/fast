@@ -1,7 +1,8 @@
 import { DOM } from "../dom.js";
 import { calcSplices, newSplice, projectArraySplices } from "./array-change-records.js";
 import type { Splice } from "./array-change-records.js";
-import { Subscriber, SubscriberSet } from "./notifier.js";
+import { SubscriberSet } from "./notifier.js";
+import type { Subscriber } from "./notifier.js";
 import type { Notifier } from "./notifier.js";
 import { Observable } from "./observable.js";
 
@@ -97,7 +98,6 @@ class ArrayObserver extends SubscriberSet {
 }
 
 /* eslint-disable prefer-rest-params */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 /**
  * Enables the array observation mechanism.
  * @remarks
@@ -248,4 +248,3 @@ export function enableArrayObservation(): void {
     };
 }
 /* eslint-enable prefer-rest-params */
-/* eslint-enable @typescript-eslint/explicit-function-return-type */

@@ -1,7 +1,7 @@
-import { attr, booleanConverter, SyntheticViewTemplate } from "@ni/fast-element";
+import { attr, booleanConverter, type SyntheticViewTemplate } from "@ni/fast-element";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 import { FlipperDirection } from "./flipper.options.js";
 

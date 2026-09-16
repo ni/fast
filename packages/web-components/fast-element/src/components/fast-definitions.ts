@@ -1,6 +1,7 @@
 import { FAST, KernelServiceId } from "../platform.js";
 import { Observable } from "../observation/observable.js";
-import { ComposableStyles, ElementStyles } from "../styles/element-styles.js";
+import { ElementStyles } from "../styles/element-styles.js";
+import type { ComposableStyles } from "../styles/element-styles.js";
 import type { ElementViewTemplate } from "../templating/template.js";
 import { AttributeConfiguration, AttributeDefinition } from "./attributes.js";
 
@@ -139,8 +140,8 @@ export class FASTElementDefinition<TType extends Function = Function> {
 
         const attributes = AttributeDefinition.collect(type, nameOrConfig.attributes);
         const observedAttributes = new Array<string>(attributes.length);
-        const propertyLookup = {};
-        const attributeLookup = {};
+        const propertyLookup: Record<string, AttributeDefinition> = {};
+        const attributeLookup: Record<string, AttributeDefinition> = {};
 
         for (let i = 0, ii = attributes.length; i < ii; ++i) {
             const current = attributes[i];

@@ -1,12 +1,12 @@
 import { attr, observable } from "@ni/fast-element";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 import {
     ARIAGlobalStatesAndProperties,
     StartEnd,
-    StartEndOptions,
+    type StartEndOptions,
 } from "../patterns/index.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 

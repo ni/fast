@@ -1,13 +1,12 @@
 import { DOM } from "../dom.js";
 import type { Behavior } from "../observation/behavior.js";
-import { Binding, defaultExecutionContext } from "../observation/observable.js";
+import { defaultExecutionContext } from "../observation/observable.js";
+import type { Binding } from "../observation/observable.js";
 import { compileTemplate } from "./compiler.js";
-import { ElementView, HTMLView, SyntheticView } from "./view.js";
-import {
-    HTMLDirective,
-    NodeBehaviorFactory,
-    TargetedHTMLDirective,
-} from "./html-directive.js";
+import { HTMLView } from "./view.js";
+import type { ElementView, SyntheticView } from "./view.js";
+import { HTMLDirective, TargetedHTMLDirective } from "./html-directive.js";
+import type { NodeBehaviorFactory } from "./html-directive.js";
 import { HTMLBindingDirective } from "./binding.js";
 
 /**

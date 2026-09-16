@@ -84,14 +84,14 @@ describe("The Observable", () => {
 
         it("can get a notifier for an array", () => {
             enableArrayObservation();
-            const array = [];
+            const array = [] as const;
             const notifier = Observable.getNotifier(array);
             expect(notifier).to.be.instanceOf(SubscriberSet);
         });
 
         it("gets the same notifier for the same array", () => {
             enableArrayObservation();
-            const array = [];
+            const array = [] as const;
             const notifier = Observable.getNotifier(array);
             const notifier2 = Observable.getNotifier(array);
             expect(notifier).to.equal(notifier2);

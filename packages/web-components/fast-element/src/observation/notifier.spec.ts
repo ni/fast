@@ -1,7 +1,8 @@
 import { expect } from "chai";
 import { DOM } from "../dom";
 import { enableArrayObservation } from "./array-observer";
-import { PropertyChangeNotifier, Subscriber, SubscriberSet } from "./notifier";
+import { PropertyChangeNotifier, SubscriberSet } from "./notifier";
+import type { Subscriber } from "./notifier";
 import { Observable } from "./observable";
 
 describe(`A SubscriberSet`, () => {
@@ -57,7 +58,7 @@ describe(`A SubscriberSet`, () => {
                 subscriberCounts.forEach(y => {
                     set.subscribe(
                         (subscribers[y - 1] = {
-                            handleChange(source, args) {
+                            handleChange(source: any, args: any) {
                                 expect(source).to.equal(sourceValue);
                                 expect(args).to.equal(argsValue);
                                 notified.push(this);

@@ -1,5 +1,6 @@
 import type { Callable } from "./interfaces.js";
-import { $global, KernelServiceId, TrustedTypesPolicy } from "./platform.js";
+import { $global, KernelServiceId } from "./platform.js";
+import type { TrustedTypesPolicy } from "./platform.js";
 
 const updateQueue = $global.FAST.getById(KernelServiceId.updateQueue, () => {
     const tasks = [] as Callable[];
@@ -66,14 +67,12 @@ const updateQueue = $global.FAST.getById(KernelServiceId.updateQueue, () => {
     });
 });
 
-/* eslint-disable */
 const fastHTMLPolicy: TrustedTypesPolicy = $global.trustedTypes.createPolicy(
     "fast-html",
     {
         createHTML: html => html,
     }
 );
-/* eslint-enable */
 
 let htmlPolicy: TrustedTypesPolicy = fastHTMLPolicy;
 

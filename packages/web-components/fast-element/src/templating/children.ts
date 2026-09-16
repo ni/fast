@@ -1,5 +1,6 @@
 import { AttachedBehaviorHTMLDirective } from "./html-directive.js";
-import { NodeBehaviorOptions, NodeObservationBehavior } from "./node-observation.js";
+import { NodeObservationBehavior } from "./node-observation.js";
+import type { NodeBehaviorOptions } from "./node-observation.js";
 import type { CaptureType } from "./template.js";
 
 /**

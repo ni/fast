@@ -1,10 +1,10 @@
-import { attr, observable, SyntheticViewTemplate } from "@ni/fast-element";
+import { attr, observable, type SyntheticViewTemplate } from "@ni/fast-element";
 import { isHTMLElement } from "@ni/fast-web-utilities";
-import { StartEnd, StartEndOptions } from "../patterns/start-end.js";
+import { StartEnd, type StartEndOptions } from "../patterns/start-end.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 
 /**
@@ -208,6 +208,5 @@ export class TreeItem extends FoundationElement {
  * TODO: https://github.com/microsoft/fast-dna/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
 export interface TreeItem extends StartEnd {}
 applyMixins(TreeItem, StartEnd);

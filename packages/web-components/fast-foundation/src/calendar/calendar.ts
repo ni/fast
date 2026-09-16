@@ -1,7 +1,7 @@
 import {
     attr,
     nullableNumberConverter,
-    SyntheticViewTemplate,
+    type SyntheticViewTemplate,
 } from "@ni/fast-element";
 import { keyEnter } from "@ni/fast-web-utilities";
 import type { StartEndOptions } from "../patterns/start-end.js";

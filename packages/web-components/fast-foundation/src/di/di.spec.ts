@@ -261,6 +261,7 @@ describe(`The transient decorator`, function () {
     it(`works as a plain decorator`, function () {
         @transient
         class Foo {}
+        // @ts-expect-error
         expect(Foo["register"]).instanceOf(Function, `Foo['register']`);
         const container = DI.createContainer();
         const foo1 = container.get(Foo);
@@ -270,6 +271,7 @@ describe(`The transient decorator`, function () {
     it(`works as an invocation`, function () {
         @transient()
         class Foo {}
+        // @ts-expect-error
         expect(Foo["register"]).instanceOf(Function, `Foo['register']`);
         const container = DI.createContainer();
         const foo1 = container.get(Foo);
@@ -282,6 +284,7 @@ describe(`The singleton decorator`, function () {
     it(`works as a plain decorator`, function () {
         @singleton
         class Foo {}
+        // @ts-expect-error
         expect(Foo["register"]).instanceOf(Function, `Foo['register']`);
         const container = DI.createContainer();
         const foo1 = container.get(Foo);
@@ -291,6 +294,7 @@ describe(`The singleton decorator`, function () {
     it(`works as an invocation`, function () {
         @singleton()
         class Foo {}
+        // @ts-expect-error
         expect(Foo["register"]).instanceOf(Function, `Foo['register']`);
         const container = DI.createContainer();
         const foo1 = container.get(Foo);
@@ -643,7 +647,7 @@ describe(`The Container class`, function () {
             const actual1 = sut.getResolver(key);
             expect(actual1).eql(resolver1, `actual1`);
             sut.registerResolver(key, resolver2);
-            const actual2 = sut.getResolver(key)!;
+            const actual2: any = sut.getResolver(key)!;
             expect(actual2).not.eql(actual1, `actual2`);
             expect(actual2).not.eql(resolver1, `actual2`);
             expect(actual2).not.eql(resolver2, `actual2`);
@@ -664,7 +668,7 @@ describe(`The Container class`, function () {
             sut.registerResolver(key, resolver1);
             sut.registerResolver(key, resolver2);
             sut.registerResolver(key, resolver3);
-            const actual1 = sut.getResolver(key)!;
+            const actual1: any = sut.getResolver(key)!;
             expect(actual1["strategy"]).eql(
                 ResolverStrategy.array,
                 `actual1['strategy']`
@@ -740,7 +744,7 @@ describe(`The Container class`, function () {
                 class Foo {
                     public static inject = Array(count).map(c => Bar);
                 }
-                const actual = sut.getFactory(Foo);
+                const actual: any = sut.getFactory(Foo);
                 expect(actual).instanceOf(FactoryImpl, `actual`);
                 expect(actual.Type).eql(Foo, `actual.Type`);
                 expect(actual["dependencies"]).deep.eq(Foo.inject);
@@ -752,7 +756,7 @@ describe(`The Container class`, function () {
 describe(`The Registration object`, function () {
     it(`instance() returns the correct resolver`, function () {
         const value = {};
-        const actual = Registration.instance("key", value);
+        const actual: any = Registration.instance("key", value);
         expect(actual["key"]).eq("key", `actual['key']`);
         expect(actual["strategy"]).eq(ResolverStrategy.instance, `actual['strategy']`);
         expect(actual["state"]).eq(value, `actual['state']`);
@@ -760,7 +764,7 @@ describe(`The Registration object`, function () {
 
     it(`singleton() returns the correct resolver`, function () {
         class Foo {}
-        const actual = Registration.singleton("key", Foo);
+        const actual:any = Registration.singleton("key", Foo);
         expect(actual["key"]).eq("key", `actual['key']`);
         expect(actual["strategy"]).eq(ResolverStrategy.singleton, `actual['strategy']`);
         expect(actual["state"]).eq(Foo, `actual['state']`);
@@ -768,7 +772,7 @@ describe(`The Registration object`, function () {
 
     it(`transient() returns the correct resolver`, function () {
         class Foo {}
-        const actual = Registration.transient("key", Foo);
+        const actual: any = Registration.transient("key", Foo);
         expect(actual["key"]).eq("key", `actual['key']`);
         expect(actual["strategy"]).eq(ResolverStrategy.transient, `actual['strategy']`);
         expect(actual["state"]).eq(Foo, `actual['state']`);
@@ -778,14 +782,14 @@ describe(`The Registration object`, function () {
         const callback = () => {
             return;
         };
-        const actual = Registration.callback("key", callback);
+        const actual: any = Registration.callback("key", callback);
         expect(actual["key"]).eq("key", `actual['key']`);
         expect(actual["strategy"]).eq(ResolverStrategy.callback, `actual['strategy']`);
         expect(actual["state"]).eq(callback, `actual['state']`);
     });
 
     it(`alias() returns the correct resolver`, function () {
-        const actual = Registration.aliasTo("key", "key2");
+        const actual: any = Registration.aliasTo("key", "key2");
         expect(actual["key"]).eq("key2", `actual['key']`);
         expect(actual["strategy"]).eq(ResolverStrategy.alias, `actual['strategy']`);
         expect(actual["state"]).eq("key", `actual['state']`);

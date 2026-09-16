@@ -1,8 +1,8 @@
 import {
     AttachedBehaviorHTMLDirective,
-    Behavior,
+    type Behavior,
     DOM,
-    Subscriber,
+    type Subscriber,
     SubscriberSet,
 } from "@ni/fast-element";
 import type { CaptureType } from "@ni/fast-element";

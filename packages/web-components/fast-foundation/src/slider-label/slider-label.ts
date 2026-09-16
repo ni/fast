@@ -1,4 +1,4 @@
-import { attr, Notifier, Observable, observable } from "@ni/fast-element";
+import { attr, type Notifier, Observable, observable } from "@ni/fast-element";
 import { Direction, Orientation } from "@ni/fast-web-utilities";
 import type { SliderConfiguration } from "../slider/slider.js";
 import { convertPixelToPercent } from "../slider/slider-utilities.js";

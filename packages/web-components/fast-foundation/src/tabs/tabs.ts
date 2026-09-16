@@ -9,11 +9,11 @@ import {
     limit,
     uniqueId,
 } from "@ni/fast-web-utilities";
-import { StartEnd, StartEndOptions } from "../patterns/start-end.js";
+import { StartEnd, type StartEndOptions } from "../patterns/start-end.js";
 import { applyMixins } from "../utilities/apply-mixins.js";
 import {
     FoundationElement,
-    FoundationElementDefinition,
+    type FoundationElementDefinition,
 } from "../foundation-element/foundation-element.js";
 
 /**
@@ -234,8 +234,11 @@ export class Tabs extends FoundationElement {
 
             // If the original property isn't emptied out,
             // the next set will morph into a grid-area style setting that is not what we want
+            // @ts-expect-error
             tab.style[gridHorizontalProperty] = "";
+            // @ts-expect-error
             tab.style[gridVerticalProperty] = "";
+            // @ts-expect-error
             tab.style[gridProperty] = `${index + 1}`;
             if (!this.isHorizontal()) {
                 tab.classList.add("vertical");
@@ -351,15 +354,20 @@ export class Tabs extends FoundationElement {
             ? "translateX"
             : "translateY";
         const offsetProperty: string = this.isHorizontal() ? "offsetLeft" : "offsetTop";
+        // @ts-expect-error
         const prev: number = this.activeIndicatorRef[offsetProperty];
+        // @ts-expect-error
         this.activeIndicatorRef.style[gridProperty] = `${this.activeTabIndex + 1}`;
+        // @ts-expect-error
         const next: number = this.activeIndicatorRef[offsetProperty];
+        // @ts-expect-error
         this.activeIndicatorRef.style[gridProperty] = `${this.prevActiveTabIndex + 1}`;
         const dif: number = next - prev;
         this.activeIndicatorRef.style.transform = `${translateProperty}(${dif}px)`;
         this.activeIndicatorRef.classList.add("activeIndicatorTransition");
         this.activeIndicatorRef.addEventListener("transitionend", () => {
             this.ticking = false;
+            // @ts-expect-error
             this.activeIndicatorRef.style[gridProperty] = `${this.activeTabIndex + 1}`;
             this.activeIndicatorRef.style.transform = `${translateProperty}(0px)`;
             this.activeIndicatorRef.classList.remove("activeIndicatorTransition");
@@ -463,6 +471,5 @@ export class Tabs extends FoundationElement {
  * TODO: https://github.com/microsoft/fast/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
 export interface Tabs extends StartEnd {}
 applyMixins(Tabs, StartEnd);
