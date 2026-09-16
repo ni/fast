@@ -1,8 +1,18 @@
 # Change Log - @ni/fast-react-wrapper
 
-<!-- This log was last generated on Tue, 04 Aug 2026 01:32:08 GMT and should not be manually modified. -->
+<!-- This log was last generated on Wed, 16 Sep 2026 16:33:38 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 10.2.0
+
+Wed, 16 Sep 2026 16:33:38 GMT
+
+### Minor changes
+
+- TypeScript 5.9.3 and dep update ([ni/fast@d15203c](https://github.com/ni/fast/commit/d15203c8d5fb7d8a41b9b7a6f313f229eca13219))
+- Bump @ni/fast-element to v10.2.0
+- Bump @ni/fast-foundation to v10.3.0
 
 ## 10.1.12
 

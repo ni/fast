@@ -2,6 +2,21 @@
   "name": "@ni/fast-colors",
   "entries": [
     {
+      "date": "Wed, 16 Sep 2026 16:33:38 GMT",
+      "version": "10.1.0",
+      "tag": "@ni/fast-colors_v10.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "7282195+m-akinc@users.noreply.github.com",
+            "package": "@ni/fast-colors",
+            "commit": "d15203c8d5fb7d8a41b9b7a6f313f229eca13219",
+            "comment": "TypeScript 5.9.3 and dep update"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 30 Oct 2025 16:22:12 GMT",
       "version": "10.0.3",
       "tag": "@ni/fast-colors_v10.0.3",
