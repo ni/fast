@@ -25,7 +25,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
         if: env.HAS_GITHUBPAGESDEPLOYTOKEN == 'true'
@@ -45,7 +45,7 @@ jobs:
       # Install dependencies
       - uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version: '26'
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
       - run: npm ci
