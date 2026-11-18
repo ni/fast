@@ -5,7 +5,7 @@
 To submit changes to FAST, the first step is to build the monorepo which requires the following to be setup:
 
 - Sync down a copy of the fast repository
-- Install Node.js version 22+ (run `node --version`) and npm version 10+ (run `npm --version`) which can be downloaded from https://nodejs.org/en/download/
+- Install Node.js version 26+ (run `node --version`) and npm version 10+ (run `npm --version`) which can be downloaded from https://nodejs.org/en/download/
 
 From the `fast` directory:
 
