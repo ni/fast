@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix anchored region leaking its window scroll listener when auto-update-mode is auto",
-  "packageName": "@ni/fast-foundation",
-  "email": "hari.ram.karthik@emerson.com",
-  "dependentChangeType": "patch"
-}

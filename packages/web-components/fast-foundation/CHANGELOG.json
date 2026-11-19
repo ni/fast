@@ -2,6 +2,21 @@
   "name": "@ni/fast-foundation",
   "entries": [
     {
+      "date": "Thu, 19 Nov 2026 16:30:39 GMT",
+      "version": "10.3.1",
+      "tag": "@ni/fast-foundation_v10.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "hari.ram.karthik@emerson.com",
+            "package": "@ni/fast-foundation",
+            "commit": "5a7315c51d319fa0f8944cd1b99a480e138aac46",
+            "comment": "Fix anchored region leaking its window scroll listener when auto-update-mode is auto"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Sep 2026 16:33:38 GMT",
       "version": "10.3.0",
       "tag": "@ni/fast-foundation_v10.3.0",

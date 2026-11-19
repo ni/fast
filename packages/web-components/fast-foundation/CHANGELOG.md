@@ -1,8 +1,16 @@
 # Change Log - @ni/fast-foundation
 
-<!-- This log was last generated on Wed, 16 Sep 2026 16:33:38 GMT and should not be manually modified. -->
+<!-- This log was last generated on Thu, 19 Nov 2026 16:30:39 GMT and should not be manually modified. -->
 
 <!-- Start content -->
+
+## 10.3.1
+
+Thu, 19 Nov 2026 16:30:39 GMT
+
+### Patches
+
+- Fix anchored region leaking its window scroll listener when auto-update-mode is auto ([ni/fast@5a7315c](https://github.com/ni/fast/commit/5a7315c51d319fa0f8944cd1b99a480e138aac46))
 
 ## 10.3.0
 
