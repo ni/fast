@@ -1,7 +1,10 @@
-import { expect } from "chai";
+import chai, { expect } from "chai";
+import spies from "chai-spies";
 import { AnchoredRegion, anchoredRegionTemplate as template } from "./index";
 import { fixture } from "../test-utilities/fixture";
 import { DOM } from "@ni/fast-element";
+
+chai.use(spies);
 
 const FASTAnchoredRegion = AnchoredRegion.compose({
     baseName: "anchored-region",
@@ -66,5 +69,19 @@ describe("Anchored Region", () => {
         expect(element.clientWidth).to.equal(content.clientWidth);
 
         await disconnect();
+    });
+
+    it("should not update on window scroll after being disconnected with auto update mode", async () => {
+        const { element, connect, disconnect } = await setup();
+        element.setAttribute("auto-update-mode", "auto");
+
+        await connect();
+        await DOM.nextUpdate();
+        await disconnect();
+
+        const requestPositionUpdatesSpy = chai.spy.on(element, "requestPositionUpdates");
+        window.dispatchEvent(new Event("scroll"));
+
+        expect(requestPositionUpdatesSpy).not.to.have.been.called();
     });
 });
