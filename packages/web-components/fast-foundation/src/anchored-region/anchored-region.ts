@@ -1329,7 +1329,7 @@ export class AnchoredRegion extends FoundationElement {
      */
     private stopAutoUpdateEventListeners = (): void => {
         window.removeEventListener(eventResize, this.update);
-        window.removeEventListener(eventScroll, this.update);
+        window.removeEventListener(eventScroll, this.update, { capture: true });
         if (this.resizeDetector !== null && this.viewportElement !== null) {
             this.resizeDetector.unobserve(this.viewportElement);
         }
